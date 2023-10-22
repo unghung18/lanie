@@ -101,10 +101,10 @@ export default function Home() {
             pagination={{
               clickable: true,
             }}
-            /*  autoplay={{
-               delay: 3000,
-               disableOnInteraction: false,
-             }} */
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
             modules={[Autoplay, Pagination, EffectFade]}
             effect="fade"
           >
@@ -149,9 +149,9 @@ export default function Home() {
             </div>
           </div>
           {/* Container */}
-          <div className='px-5 max-w-[1280px] mx-auto text-center'>
+          <div className='px-4 max-w-[1280px] mx-auto text-center'>
             <section>
-              <h2>SẢN PHẨM MỚI NHẤT</h2>
+              <h2 className='my-[60px] text-[28px] text-center md:text-[36px] font-bold'>SẢN PHẨM MỚI NHẤT</h2>
 
               <Swiper
                 breakpoints={{
@@ -159,10 +159,15 @@ export default function Home() {
                     slidesPerView: 4,
                   },
                   760: {
+                    spaceBetween: 20,
                     slidesPerView: 3,
                   },
                   0: {
+                    spaceBetween: 5,
                     slidesPerView: 2,
+                    navigation: {
+                      enabled: false
+                    }
                   },
                 }}
                 spaceBetween={20}
@@ -171,9 +176,9 @@ export default function Home() {
                 speed={800}
                 navigation={true}
                 autoplay={{
-                  delay: 5000,
                   disableOnInteraction: true,
-                  stopOnLastSlide: false
+                  stopOnLastSlide: false,
+                  delay: 2000,
                 }}
                 modules={[Navigation, Autoplay]}
               >
