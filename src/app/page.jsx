@@ -151,16 +151,22 @@ export default function Home() {
           {/* Container */}
           <div className='px-4 max-w-[1280px] mx-auto text-center'>
             <section>
-              <h2 className='my-[60px] text-[28px] text-center md:text-[36px] font-bold'>SẢN PHẨM MỚI NHẤT</h2>
+              <h2 className='my-[40px] md:my-[60px] text-[28px] text-center md:text-[36px] font-bold'>SẢN PHẨM MỚI NHẤT</h2>
 
               <Swiper
                 breakpoints={{
                   1024: {
                     slidesPerView: 4,
+                    navigation: {
+                      enabled: true
+                    }
                   },
                   760: {
                     spaceBetween: 20,
                     slidesPerView: 3,
+                    navigation: {
+                      enabled: true
+                    }
                   },
                   0: {
                     spaceBetween: 5,
