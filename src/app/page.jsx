@@ -88,6 +88,30 @@ export default function Home() {
       price: 50000,
       image: latestProduct5
     },
+    {
+      id: 6,
+      sale: true,
+      code: 'A39023',
+      name: 'Áo phông',
+      price: 50000,
+      image: latestProduct1
+    },
+    {
+      id: 7,
+      sale: true,
+      code: 'A39023',
+      name: 'Áo phông',
+      price: 50000,
+      image: latestProduct2
+    },
+    {
+      id: 8,
+      sale: true,
+      code: 'A39023',
+      name: 'Áo phông',
+      price: 50000,
+      image: latestProduct3
+    },
   ]
   return (
     <>
@@ -158,6 +182,7 @@ export default function Home() {
               <Swiper
                 breakpoints={{
                   1024: {
+                    spaceBetween: 30,
                     slidesPerView: 4,
                     navigation: {
                       enabled: true,
@@ -178,10 +203,7 @@ export default function Home() {
                     }
                   },
                 }}
-                spaceBetween={20}
-                slidesPerView={4}
                 loop={true}
-                speed={800}
                 navigation={true}
                 autoplay={{
                   disableOnInteraction: true,
@@ -195,7 +217,6 @@ export default function Home() {
                     <ProductCard data={item} />
                   </SwiperSlide>
                 ))}
-                <SlideNextButton />
               </Swiper>
             </section>
             <section>
