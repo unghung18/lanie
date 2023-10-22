@@ -14,13 +14,15 @@ import latestProduct5 from '../assets/latestProduct5.webp';
 
 import Navbar from '@/components/Navbar';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper';
+import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import React from 'react';
+import SlideNextButton from '@/components/SlideNextButton';
 
 export default function Home() {
+
   const myslides = [
     {
       title: "new arrivals",
@@ -158,14 +160,14 @@ export default function Home() {
                   1024: {
                     slidesPerView: 4,
                     navigation: {
-                      enabled: true
+                      enabled: true,
                     }
                   },
                   760: {
                     spaceBetween: 20,
                     slidesPerView: 3,
                     navigation: {
-                      enabled: true
+                      enabled: true,
                     }
                   },
                   0: {
@@ -183,8 +185,8 @@ export default function Home() {
                 navigation={true}
                 autoplay={{
                   disableOnInteraction: true,
-                  stopOnLastSlide: false,
                   delay: 2000,
+                  stopOnLastSlide: false
                 }}
                 modules={[Navigation, Autoplay]}
               >
@@ -193,8 +195,8 @@ export default function Home() {
                     <ProductCard data={item} />
                   </SwiperSlide>
                 ))}
+                <SlideNextButton />
               </Swiper>
-
             </section>
             <section>
 

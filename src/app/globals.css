@@ -15,6 +15,7 @@
 .swiper-button-next,
 .swiper-button-prev {
   color: white !important;
+  position: relative;
 }
 
 .swiper-button-next:after,
