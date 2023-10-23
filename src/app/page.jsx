@@ -1,4 +1,6 @@
 'use client';
+
+import banner from "../assets/hb_image1.webp"
 import slider1 from '../assets/slider1.webp';
 import slider2 from '../assets/slider2.webp';
 
@@ -12,6 +14,15 @@ import latestProduct3 from '../assets/latestProduct3.webp';
 import latestProduct4 from '../assets/latestProduct4.webp';
 import latestProduct5 from '../assets/latestProduct5.webp';
 
+import TopSeller1 from '../assets/Topseller1.jpg';
+import TopSeller2 from '../assets/Topseller2.jpg';
+import TopSeller3 from '../assets/Topseller3.jpg';
+import TopSeller4 from '../assets/Topseller4.jpg';
+import TopSeller5 from '../assets/Topseller5.jpg';
+import TopSeller6 from '../assets/Topseller6.jpg';
+import TopSeller7 from '../assets/Topseller7.jpg';
+import TopSeller8 from '../assets/Topseller8.jpg';
+
 import Navbar from '@/components/Navbar';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper/modules';
@@ -20,6 +31,7 @@ import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import React from 'react';
 import SlideNextButton from '@/components/SlideNextButton';
+import Footer from "@/components/Footer";
 
 export default function Home() {
 
@@ -47,12 +59,12 @@ export default function Home() {
     }
   ]
 
-  const latestProducts = [
+  const productsData = [
     {
       id: 1,
       sale: true,
       code: 'A39023',
-      name: 'Áo phông',
+      name: 'ÁO PHÔNG',
       price: 50000,
       image: latestProduct1
     },
@@ -60,7 +72,7 @@ export default function Home() {
       id: 2,
       sale: true,
       code: 'A39023',
-      name: 'Áo phông',
+      name: 'ÁO PHÔNG',
       price: 50000,
       image: latestProduct2
     },
@@ -68,7 +80,7 @@ export default function Home() {
       id: 3,
       sale: false,
       code: 'A39023',
-      name: 'Áo phông',
+      name: 'ÁO PHÔNG',
       price: 50000,
       image: latestProduct3
     },
@@ -76,7 +88,7 @@ export default function Home() {
       id: 4,
       sale: false,
       code: 'A39023',
-      name: 'Áo phông',
+      name: 'ÁO PHÔNG',
       price: 50000,
       image: latestProduct4
     },
@@ -84,7 +96,7 @@ export default function Home() {
       id: 5,
       sale: true,
       code: 'A39023',
-      name: 'Áo phông',
+      name: 'ÁO PHÔNG',
       price: 50000,
       image: latestProduct5
     },
@@ -92,7 +104,7 @@ export default function Home() {
       id: 6,
       sale: true,
       code: 'A39023',
-      name: 'Áo phông',
+      name: 'ÁO PHÔNG',
       price: 50000,
       image: latestProduct1
     },
@@ -100,7 +112,7 @@ export default function Home() {
       id: 7,
       sale: true,
       code: 'A39023',
-      name: 'Áo phông',
+      name: 'ÁO PHÔNG',
       price: 50000,
       image: latestProduct2
     },
@@ -108,9 +120,137 @@ export default function Home() {
       id: 8,
       sale: true,
       code: 'A39023',
-      name: 'Áo phông',
+      name: 'ÁO PHÔNG',
       price: 50000,
       image: latestProduct3
+    },
+    {
+      id: 9,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller1
+    },
+    {
+      id: 10,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller2
+    },
+    {
+      id: 11,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller3
+    },
+    {
+      id: 12,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller4
+    },
+    {
+      id: 13,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller5
+    },
+    {
+      id: 14,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller6
+    },
+    {
+      id: 15,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller7
+    },
+    {
+      id: 16,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller8
+    },
+    {
+      id: 17,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller1
+    },
+    {
+      id: 18,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller2
+    },
+    {
+      id: 19,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller3
+    },
+    {
+      id: 20,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller4
+    },
+    {
+      id: 21,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller5
+    },
+    {
+      id: 22,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller6
+    },
+    {
+      id: 23,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller7
+    },
+    {
+      id: 24,
+      sale: true,
+      code: 'A39023',
+      name: 'ÁO PHÔNG',
+      price: 120000,
+      image: TopSeller8
     },
   ]
   return (
@@ -177,7 +317,7 @@ export default function Home() {
           {/* Container */}
           <div className='px-4 max-w-[1280px] mx-auto text-center'>
             <section>
-              <h2 className='my-[40px] md:my-[60px] text-[28px] text-center md:text-[36px] font-bold'>SẢN PHẨM MỚI NHẤT</h2>
+              <h2 className='my-[40px] md:my-[60px] text-[28px] text-center md:text-[36px] font-bold'>SẢN PHẨM MỚI</h2>
 
               <Swiper
                 breakpoints={{
@@ -212,22 +352,74 @@ export default function Home() {
                 }}
                 modules={[Navigation, Autoplay]}
               >
-                {latestProducts.map((item) => (
+                {productsData.slice(0, 8).map((item) => (
                   <SwiperSlide key={item.id}>
                     <ProductCard data={item} />
                   </SwiperSlide>
                 ))}
               </Swiper>
             </section>
-            <section>
+            {/*   <section>
+              <h2 className='my-[40px] md:my-[60px] text-[28px] text-center md:text-[36px] font-bold'>SẢN PHẨM BÁN CHẠY</h2>
+              <div className='grid grid-cols-2 gap-[5px] md:gap-5 md:grid-cols-4'>
+                {productsData.slice(8, 16).map((item, index) => (
+                  <ProductCard key={index} data={item} />
+                ))}
 
+              </div>
+            </section> */}
+            <section>
+              <h2 className='my-[40px] md:my-[60px] text-[28px] text-center md:text-[36px] font-bold'>SẢN PHẨM BÁN CHẠY</h2>
+
+              <Swiper
+                breakpoints={{
+                  1024: {
+                    spaceBetween: 30,
+                    slidesPerView: 4,
+                    navigation: {
+                      enabled: true,
+                    }
+                  },
+                  760: {
+                    spaceBetween: 20,
+                    slidesPerView: 3,
+                    navigation: {
+                      enabled: true,
+                    }
+                  },
+                  0: {
+                    spaceBetween: 5,
+                    slidesPerView: 2,
+                    navigation: {
+                      enabled: false
+                    }
+                  },
+                }}
+                loop={true}
+                navigation={true}
+                autoplay={{
+                  disableOnInteraction: true,
+                  delay: 2000,
+                  stopOnLastSlide: false
+                }}
+                modules={[Navigation, Autoplay]}
+              >
+                {productsData.slice(8, 16).map((item) => (
+                  <SwiperSlide key={item.id}>
+                    <ProductCard data={item} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </section>
           </div>
           {/* Banner */}
-          <div>
-
+          <div className="my-[40px] md:my-[60px]">
+            <Image src={banner} className='w-full' alt="avatar" />
           </div>
-          {/* Footer */}
+        </div>
+        {/* Footer */}
+        <div>
+          <Footer />
         </div>
       </div >
     </>
