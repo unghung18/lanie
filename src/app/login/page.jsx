@@ -17,7 +17,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch("/api/login", {
+            const res = await fetch("https://lanie.vercel.app/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -27,9 +27,7 @@ const Login = () => {
             if (res.status === 401) {
                 alert("Invalid email or password");
             }
-            else {
-                router.push('/');
-            }
+            router.push('/');
         } catch (error) {
             alert(error)
         }

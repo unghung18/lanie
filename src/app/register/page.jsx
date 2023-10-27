@@ -18,7 +18,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch("/api/register", {
+            const res = await fetch("https://lanie.vercel.app/api/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -28,9 +28,7 @@ const Register = () => {
             if (res.status === 422) {
                 alert("Email already taken");
             }
-            else {
-                router.push('/login');
-            }
+            router.push('/login');
         } catch (error) {
             alert(error)
         }
