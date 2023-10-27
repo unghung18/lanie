@@ -7,7 +7,7 @@ export const POST = async (request) => {
 
     const { name, email, password } = await request.json();
 
-    connectDb()
+    await connectDb()
 
     const checkedUser = await User.findOne({ email: email });
 
