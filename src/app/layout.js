@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
-import 'swiper/css/autoplay';
+import ReduxProvider from '../redux/provider';
 
 const josefin = Josefin_Sans({
   subsets: ['latin'],
@@ -21,7 +21,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={josefin.className}>{children}</body>
+      <ReduxProvider>
+        <body className={josefin.className}>{children}</body>
+      </ReduxProvider>
     </html>
   )
 }

@@ -1,17 +1,42 @@
 'use client'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { AiFillEyeInvisible } from 'react-icons/ai';
 
 const Register = () => {
 
+    const router = useRouter();
+
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+        password: ""
+    })
     const [visible, setVisible] = useState(true);
 
-    const handleSubmit = () => {
-
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch("/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(user)
+            })
+            if (res.status === 422) {
+                alert("Email already taken");
+            }
+            else {
+                router.push('/login');
+            }
+        } catch (error) {
+            alert(error)
+        }
     }
-    const handleChangeInput = () => {
-
+    const handleChangeInput = (e) => {
+        setUser({ ...user, [e.target.name]: e.target.value })
     }
 
     return (

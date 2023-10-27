@@ -1,16 +1,41 @@
 'use client'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { AiFillEyeInvisible } from 'react-icons/ai';
 
 const Login = () => {
 
     const [visible, setVisible] = useState(true);
+    const [user, setUser] = useState({
+        email: "",
+        password: ""
+    })
 
-    const handleSubmit = () => {
+    const router = useRouter();
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch("/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(user)
+            })
+            if (res.status === 401) {
+                alert("Invalid email or password");
+            }
+            else {
+                router.push('/');
+            }
+        } catch (error) {
+            alert(error)
+        }
     }
-    const handleChangeInput = () => {
+    const handleChangeInput = (e) => {
+        setUser({ ...user, [e.target.name]: e.target.value })
 
     }
     return (

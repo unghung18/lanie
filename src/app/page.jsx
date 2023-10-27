@@ -30,7 +30,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import React from 'react';
-import SlideNextButton from '@/components/SlideNextButton';
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -255,9 +254,9 @@ export default function Home() {
   ]
   return (
     <>
-      <div className='overflow-hidden'>
+      <div className='overflow-hidden cursor-pointer'>
         <Navbar />
-        <div>
+        <div className="mt-[68px] md:md-[78.5px]">
           {/* Slider */}
           <Swiper
             className='h-[calc(100vh-125px)] md:h-[calc(100vh-78.5px)] relative'
@@ -324,23 +323,14 @@ export default function Home() {
                   1024: {
                     spaceBetween: 30,
                     slidesPerView: 4,
-                    navigation: {
-                      enabled: true,
-                    }
                   },
                   760: {
                     spaceBetween: 20,
                     slidesPerView: 3,
-                    navigation: {
-                      enabled: true,
-                    }
                   },
                   0: {
                     spaceBetween: 5,
                     slidesPerView: 2,
-                    navigation: {
-                      enabled: false
-                    }
                   },
                 }}
                 loop={true}
@@ -376,23 +366,16 @@ export default function Home() {
                   1024: {
                     spaceBetween: 30,
                     slidesPerView: 4,
-                    navigation: {
-                      enabled: true,
-                    }
+
                   },
                   760: {
                     spaceBetween: 20,
                     slidesPerView: 3,
-                    navigation: {
-                      enabled: true,
-                    }
+
                   },
                   0: {
                     spaceBetween: 5,
                     slidesPerView: 2,
-                    navigation: {
-                      enabled: false
-                    }
                   },
                 }}
                 loop={true}

@@ -1,32 +1,50 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchBar from './SearchBar';
 import Link from 'next/link';
 import { CiShoppingCart } from "react-icons/ci";
 import { AiOutlineMenu, AiOutlineClose, AiFillHome } from "react-icons/ai";
-import { BiSearch } from "react-icons/bi"
-
+import { BiSearch } from "react-icons/bi";
+import { useDispatch, useSelector } from 'react-redux';
 
 import Image from 'next/image';
 import avatar from '../../public/next.svg';
+import { cartActions } from '@/redux/features/cartSlice';
 
 const Navbar = () => {
     const [showProfile, setShowProfile] = useState(false);
     const [showNav, setShowNav] = useState(false);
+    const [qty, setQty] = useState(null);
+    const [cartProducts, setCartProducts] = useState([]);
+    const [totalPayment, setTotalPayment] = useState(null);
+
+    const dispatch = useDispatch();
+    const { totalQuantity, cartItems, totalAmount } = useSelector(state => state.cart)
+
+    const deleteItem = (id) => {
+        dispatch(cartActions.deleteItem(id));
+    };
+
+    useEffect(() => {
+        setQty(totalQuantity);
+        setCartProducts(cartItems);
+        setTotalPayment(totalAmount);
+    }, [totalQuantity, cartItems, totalAmount]);
+
 
     return (
-        <div className='relative'>
+        <div className='fixed top-0 left-0 right-0 z-50 bg-white shadow-md'>
             <div className='flex items-center justify-between py-4 relative px-5 max-w-[1280px] mx-auto'>
                 <div className='flex items-center space-x-10 lg:space-x-20'>
                     <div className='font-semibold text-2xl'>
-                        <a href="">LANIE</a>
+                        <a href="/">LANIE</a>
                     </div>
                     <nav className='max-md:hidden'>
                         <ul className='flex items-center lg:space-x-10 space-x-7 opacity-70 text-[15px]'>
-                            <li><a href="" className='py-3 inline-block w-full hover:text-[#f51167]'>SHOP</a></li>
-                            <li><a href="" className='py-3 inline-block w-full hover:text-[#f51167]'>SẢN PHẨM</a></li>
-                            <li><a href="" className='py-3 inline-block w-full hover:text-[#f51167]'>BỘ SƯU TẬP</a></li>
-                            <li><a href="" className='py-3 inline-block w-full hover:text-[#f51167]'>LIÊN HỆ</a></li>
+                            <li><Link href="" className='py-3 inline-block w-full hover:text-[#f51167]'>SHOP</Link></li>
+                            <li><Link href="/products" className='py-3 inline-block w-full hover:text-[#f51167]'>SẢN PHẨM</Link></li>
+                            <li><Link href="" className='py-3 inline-block w-full hover:text-[#f51167]'>BỘ SƯU TẬP</Link></li>
+                            <li><Link href="" className='py-3 inline-block w-full hover:text-[#f51167]'>LIÊN HỆ</Link></li>
                         </ul>
                     </nav>
                 </div>
@@ -38,8 +56,48 @@ const Navbar = () => {
                             <Link href="/login">Login</Link>
                         </div>
                     </div>
-                    <div className='p-2 bg-gray-100 rounded-full'>
+                    <div className='p-2 bg-gray-100 rounded-full relative group'>
+                        <div className='absolute top-[-5px] right-[0] w-[14px] h-[14px] rounded-full flex-center text-xs bg-[#f51167] text-white'>{qty && qty}</div>
                         <CiShoppingCart size={20} />
+                        <div className='absolute hidden bg-white rounded-sm group-hover:md:block top-[calc(100%+10px)] right-[-10px] shadow-[1px_1px_5px_5px_rgba(0,0,0,0.1)] w-[350px] before:content-[""] before:w-[46px] before:h-[20px] before:bg-transparent before:absolute before:top-[-20px] before:right-0'>
+                            {cartProducts.length === 0 ?
+                                <div>
+                                    Giỏ hàng trống
+                                </div>
+                                :
+                                <>
+                                    <div className='overflow-y-auto h-[220px] p-5 space-y-3'>
+                                        {cartProducts?.map((e, i) => (
+                                            <div key={i} className='flex items-center justify-between'>
+                                                <div className='flex items-center'>
+                                                    <Image src={e.image} alt='product-img' className='w-[50px] rounded-sm mr-3' />
+                                                    <div>
+                                                        <p className='font-bold'>{e.name}</p>
+                                                        <div>
+                                                            <span className='mr-2'>SL: {e.quantity}</span>
+                                                            <span className='text-[#f51167]'>Giá: {e.totalPrice.toLocaleString()}₫</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <AiOutlineClose size={20} onClick={() => deleteItem(e.id)} />
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className='bg-white p-3'>
+                                        <div className='flex justify-between items-center'>
+                                            <p className='font-bold text-xs'>TỔNG: </p>
+                                            <p>{qty && qty}</p>
+                                        </div>
+                                        <div className='flex justify-between items-center'>
+                                            <p className='font-bold text-xs'>THANH TOÁN: </p>
+                                            <p>{totalPayment?.toLocaleString()}₫</p>
+                                        </div>
+                                        <Link href="" className='w-full bg-black text-white p-2 flex-center my-2 rounded-sm'>THANH TOÁN NGAY</Link>
+                                        <Link href="" className='w-full border-black border-[1px] p-2 flex-center rounded-sm'>XEM GIỎ HÀNG</Link>
+                                    </div>
+                                </>
+                            }
+                        </div>
                     </div>
                     <span onClick={() => setShowNav(!showNav)} className='p-[9px] bg-gray-100 rounded-full md:hidden'>
                         <AiOutlineMenu />
