@@ -54,6 +54,7 @@ const Navbar = () => {
                         <Image src={avatar} alt="avatar" className=' w-[35px] h-[35px] rounded-full object-cover' />
                         <div className={`${showProfile ? "" : "hidden"} absolute bg-white z-20 rounded-lg shadow-lg`}>
                             <Link href="/login">Login</Link>
+                            <Link href="/register">Register</Link>
                         </div>
                     </div>
                     <div className='p-2 bg-gray-100 rounded-full relative group'>

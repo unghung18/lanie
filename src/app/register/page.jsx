@@ -25,10 +25,14 @@ const Register = () => {
                 },
                 body: JSON.stringify(user)
             })
-            if (res.status === 422) {
-                alert("Email already taken");
+            const data = await res.json()
+            console.log(data)
+            if (data.success) {
+                router.push("/login")
             }
-            router.push('/login');
+            else {
+                alert(data.message)
+            }
         } catch (error) {
             alert(error)
         }

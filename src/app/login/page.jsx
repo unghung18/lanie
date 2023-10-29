@@ -24,10 +24,13 @@ const Login = () => {
                 },
                 body: JSON.stringify(user)
             })
-            if (res.status === 401) {
-                alert("Invalid email or password");
+            const data = await res.json()
+            if (data.success) {
+                router.push("/")
             }
-            router.push('/');
+            else {
+                alert(data.message);
+            }
         } catch (error) {
             alert(error)
         }
