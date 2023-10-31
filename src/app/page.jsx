@@ -60,6 +60,105 @@ export default function Home() {
     }
   ]
 
+  /*  const products = [
+     {
+       _id: 1,
+       sale: 0,
+       title: 'ÁO PHÔNG',
+       price: 50000,
+       description: "ÁO PHÔNG abcdef",
+       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
+       size: ["size2", "size4"],
+       inventory: 10,
+       color: ["#fff", "#000"],
+       tag: "ao, ao phong"
+     },
+     {
+       _id: 2,
+       sale: 0,
+       title: 'ÁO PHÔNG',
+       price: 50000,
+       description: "ÁO PHÔNG abcdef",
+       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
+       size: ["size2", "size4"],
+       inventory: 10,
+       color: ["#fff", "#000"],
+       tag: "ao, ao phong"
+     },
+     {
+       _id: 3,
+       sale: 0,
+       title: 'ÁO PHÔNG',
+       price: 50000,
+       description: "ÁO PHÔNG abcdef",
+       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
+       size: ["size2", "size4"],
+       inventory: 10,
+       color: ["#fff", "#000"],
+       tag: "ao, ao phong"
+     },
+     {
+       _id: 4,
+       sale: 0,
+       title: 'ÁO PHÔNG',
+       price: 50000,
+       description: "ÁO PHÔNG abcdef",
+       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
+       size: ["size2", "size4"],
+       inventory: 10,
+       color: ["#fff", "#000"],
+       tag: "ao, ao phong"
+     },
+     {
+       _id: 5,
+       sale: 0,
+       title: 'ÁO PHÔNG',
+       price: 50000,
+       description: "ÁO PHÔNG abcdef",
+       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
+       size: ["size2", "size4"],
+       inventory: 10,
+       color: ["#fff", "#000"],
+       tag: "ao, ao phong"
+     },
+     {
+       _id: 6,
+       sale: 0,
+       title: 'ÁO PHÔNG',
+       price: 50000,
+       description: "ÁO PHÔNG abcdef",
+       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
+       size: ["size2", "size4"],
+       inventory: 10,
+       color: ["#fff", "#000"],
+       tag: "ao, ao phong"
+     },
+     {
+       _id: 7,
+       sale: 0,
+       title: 'ÁO PHÔNG',
+       price: 50000,
+       description: "ÁO PHÔNG abcdef",
+       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
+       size: ["size2", "size4"],
+       inventory: 10,
+       color: ["#fff", "#000"],
+       tag: "ao, ao phong"
+     },
+     {
+       _id: 8,
+       sale: 0,
+       title: 'ÁO PHÔNG',
+       price: 50000,
+       description: "ÁO PHÔNG abcdef",
+       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
+       size: ["size2", "size4"],
+       inventory: 10,
+       color: ["#fff", "#000"],
+       tag: "ao, ao phong"
+     }
+   ] */
+
   const getAllProducts = async () => {
     try {
       const res = await fetch("/api/product/latest-product", {

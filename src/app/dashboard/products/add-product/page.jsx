@@ -1,8 +1,6 @@
 'use client';
-import convertToBase64 from '@/utils/ConvertToBase64';
-import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
-import { BiUpload } from "react-icons/bi"
+import { CldUploadWidget } from "next-cloudinary"
 
 const Page = () => {
     const [product, setProduct] = useState({
@@ -65,6 +63,14 @@ const Page = () => {
         reader.onerror = (error) => {
             console.log("Error: ", error)
         }
+    }
+
+    const onupload = (result) => {
+        const newImageUrl = result.info.secure_url
+        const image = product.image
+        image.push(newImageUrl)
+
+        setProduct({ ...product, image: image })
     }
 
     const handleDeleteFile = (i) => {
@@ -196,16 +202,19 @@ const Page = () => {
                             </div>
                         ))}
                     </div>
-                    <div>
-                        <label htmlFor="image" className='border px-1 py-2 rounded-md cursor-pointer'>Upload a file</label>
-                        <input
-                            type="file"
-                            className='hidden'
-                            id='image'
-                            name="image"
-                            onChange={handleFile}
-                        />
-                    </div>
+                    <CldUploadWidget uploadPreset='ze0kziqp' onUpload={onupload}>
+                        {({ open }) => {
+                            function handleOnclick(e) {
+                                e.preventDefault()
+                                open()
+                            }
+                            return (
+                                <button className='border-[1px] rounded-lg p-1 px-2' onClick={handleOnclick}>
+                                    Upload Product Images
+                                </button>
+                            )
+                        }}
+                    </CldUploadWidget>
                 </div>
                 <div>
                     <label htmlFor="size" className='font-medium'>Size</label>
