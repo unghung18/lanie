@@ -1,4 +1,5 @@
 'use client'
+import ProductCard from '@/components/ProductCard';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
@@ -6,6 +7,7 @@ import { BsSliders2Vertical, BsChevronUp } from "react-icons/bs";
 
 const Products = () => {
     const [showFilter, setShowFilter] = useState(true);
+    const [products, setProducts] = useState([])
 
     const router = useRouter();
     const SearchParams = useSearchParams();
@@ -129,14 +131,34 @@ const Products = () => {
             return false;
         }
     }
+
+    const getAllProducts = async () => {
+        try {
+            const res = await fetch("/api/product", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            })
+            const data = await res.json()
+            if (data.success) {
+                setProducts(data.data)
+            }
+            else {
+                alert(data.message)
+            }
+        } catch (error) {
+            alert(error)
+        }
+    }
     useEffect(() => {
-        console.log("a")
+        getAllProducts();
     }, [category, price, size, color]);
 
     return (
-        <div className='flex relative'>
+        <div className='flex'>
             <div className='relative'>
-                <div className={`md:w-[250px] border-l-[0.5px] border-r-[0.5px] ${showFilter ? "max-md:w-[250px]" : "w-0 max-md:invisible"}`}>
+                <div className={`md:w-[300px] border-l-[0.5px] border-r-[0.5px] ${showFilter ? "max-md:w-[250px]" : "w-0 max-md:invisible"}`}>
                     <div className='flex items-center justify-between px-5 py-4 border-b-[0.5px]'>
                         <h1 className='text-neutral-800'>Filters</h1>
                         <BsSliders2Vertical size={20} className='text-neutral-600' />
@@ -196,7 +218,7 @@ const Products = () => {
                             <h1 className='text-neutral-800'>Prices</h1>
                             <BsChevronUp size={18} className='text-neutral-600' />
                         </div>
-                        <div className='px-5 text-[14px]'>
+                        <div className='px-5 text-[15px]'>
                             <ul className="space-y-1">
                                 <li>
                                     <label className="flex items-center cursor-pointer">
@@ -329,7 +351,13 @@ const Products = () => {
                 </div>
                 <div onClick={() => setShowFilter(!showFilter)} className='absolute md:hidden top-[20px] right-[-42px] rotate-90 bg-gray-100 px-2 rounded-t-sm cursor-pointer'>Filters</div>
             </div>
-            <div></div>
+            <div className='flex-1 p-6'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3'>
+                    {products.map((item) => (
+                        <ProductCard data={item} key={item._id} />
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }

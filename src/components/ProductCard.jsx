@@ -14,7 +14,7 @@ const ProductCard = ({ data }) => {
         <div>
             <div className='relative group cursor-pointer'>
                 {data.sale && <span className='absolute right-[16px] top-[14px] text-[10px] font-bold text-white bg-[#50e550] rounded-[15px] px-2 pt-1'>ON SALE</span>}
-                <Image src={data.image} alt='product' />
+                <img src={data.image[0]} alt='product' />
                 <div className=' w-full absolute right-0 bottom-4 pr-[15px] flex justify-end items-center z-10 max-sm:hidden' >
                     <Link href="/" className='mx-2 w-[36px] h-[36px] flex-center bg-white rounded-full text-[18px] text-[#000] shadow-md cursor-pointer'>
                         <AiOutlineShopping onClick={() => dispatch(cartActions.addItem(data))} />
@@ -28,7 +28,7 @@ const ProductCard = ({ data }) => {
                 </div>
             </div>
             <div className='py-3 px-2 flex justify-between items-center max-lg:flex-col text-[14px] font-bold text-[#8A8A8F] space-y-2'>
-                <p>{data.name}</p>
+                <p>{data.title}</p>
                 <h6 className='text-[16px] font-bold text-[#111111]'>{data.price.toLocaleString()}₫</h6>
             </div>
         </div>

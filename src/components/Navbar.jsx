@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
 import avatar from '../../public/next.svg';
 import { cartActions } from '@/redux/features/cartSlice';
+import { useSession, signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
     const [showProfile, setShowProfile] = useState(false);
@@ -19,11 +21,17 @@ const Navbar = () => {
     const [totalPayment, setTotalPayment] = useState(null);
 
     const dispatch = useDispatch();
+    const session = useSession();
+    const router = useRouter()
+
     const { totalQuantity, cartItems, totalAmount } = useSelector(state => state.cart)
 
     const deleteItem = (id) => {
         dispatch(cartActions.deleteItem(id));
     };
+    const handleSignOut = async () => {
+        await signOut({ redirect: false });
+    }
 
     useEffect(() => {
         setQty(totalQuantity);
@@ -51,10 +59,11 @@ const Navbar = () => {
                 <div className='flex items-center space-x-4'>
                     <SearchBar />
                     <div onClick={() => setShowProfile(!showProfile)} className='relative cursor-pointer'>
-                        <Image src={avatar} alt="avatar" className=' w-[35px] h-[35px] rounded-full object-cover' />
+                        <Image src={avatar} width={35} height={35} alt="avatar" className=' w-[35px] h-[35px] rounded-full object-cover' />
                         <div className={`${showProfile ? "" : "hidden"} absolute bg-white z-20 rounded-lg shadow-lg`}>
+                            <p>{session.data?.user.name}</p>
                             <Link href="/login">Login</Link>
-                            <Link href="/register">Register</Link>
+                            <div onClick={handleSignOut}>Sign Out</div>
                         </div>
                     </div>
                     <div className='p-2 bg-gray-100 rounded-full relative group'>
@@ -71,7 +80,7 @@ const Navbar = () => {
                                         {cartProducts?.map((e, i) => (
                                             <div key={i} className='flex items-center justify-between'>
                                                 <div className='flex items-center'>
-                                                    <Image src={e.image} alt='product-img' className='w-[50px] rounded-sm mr-3' />
+                                                    <img src={e.image[0]} alt='product-img' className='w-[50px] rounded-sm mr-3' />
                                                     <div>
                                                         <p className='font-bold'>{e.name}</p>
                                                         <div>

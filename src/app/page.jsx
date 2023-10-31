@@ -29,10 +29,12 @@ import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from "@/components/Footer";
 
 export default function Home() {
+
+  const [products, setProducts] = useState([]);
 
   const myslides = [
     {
@@ -58,200 +60,29 @@ export default function Home() {
     }
   ]
 
-  const productsData = [
-    {
-      id: 1,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 50000,
-      image: latestProduct1
-    },
-    {
-      id: 2,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 50000,
-      image: latestProduct2
-    },
-    {
-      id: 3,
-      sale: false,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 50000,
-      image: latestProduct3
-    },
-    {
-      id: 4,
-      sale: false,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 50000,
-      image: latestProduct4
-    },
-    {
-      id: 5,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 50000,
-      image: latestProduct5
-    },
-    {
-      id: 6,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 50000,
-      image: latestProduct1
-    },
-    {
-      id: 7,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 50000,
-      image: latestProduct2
-    },
-    {
-      id: 8,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 50000,
-      image: latestProduct3
-    },
-    {
-      id: 9,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller1
-    },
-    {
-      id: 10,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller2
-    },
-    {
-      id: 11,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller3
-    },
-    {
-      id: 12,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller4
-    },
-    {
-      id: 13,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller5
-    },
-    {
-      id: 14,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller6
-    },
-    {
-      id: 15,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller7
-    },
-    {
-      id: 16,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller8
-    },
-    {
-      id: 17,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller1
-    },
-    {
-      id: 18,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller2
-    },
-    {
-      id: 19,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller3
-    },
-    {
-      id: 20,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller4
-    },
-    {
-      id: 21,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller5
-    },
-    {
-      id: 22,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller6
-    },
-    {
-      id: 23,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller7
-    },
-    {
-      id: 24,
-      sale: true,
-      code: 'A39023',
-      name: 'ÁO PHÔNG',
-      price: 120000,
-      image: TopSeller8
-    },
-  ]
+  const getAllProducts = async () => {
+    try {
+      const res = await fetch("/api/product/latest-product", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      })
+      const data = await res.json()
+      if (data.success) {
+        console.log(data)
+        setProducts(data.data)
+      }
+      else {
+        alert(data.message)
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
+  useEffect(() => {
+    getAllProducts();
+  }, []);
   return (
     <>
       <div className='overflow-hidden cursor-pointer'>
@@ -342,8 +173,8 @@ export default function Home() {
                 }}
                 modules={[Navigation, Autoplay]}
               >
-                {productsData.slice(0, 8).map((item) => (
-                  <SwiperSlide key={item.id}>
+                {products.map((item) => (
+                  <SwiperSlide key={item._id}>
                     <ProductCard data={item} />
                   </SwiperSlide>
                 ))}
@@ -387,8 +218,8 @@ export default function Home() {
                 }}
                 modules={[Navigation, Autoplay]}
               >
-                {productsData.slice(8, 16).map((item) => (
-                  <SwiperSlide key={item.id}>
+                {products.map((item) => (
+                  <SwiperSlide key={item._id}>
                     <ProductCard data={item} />
                   </SwiperSlide>
                 ))}
