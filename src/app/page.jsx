@@ -8,21 +8,6 @@ import feature1 from '../assets/feature1.webp';
 import feature2 from '../assets/feature2.webp';
 import feature3 from '../assets/feature3.webp';
 
-import latestProduct1 from '../assets/latestProduct1.webp';
-import latestProduct2 from '../assets/latestProduct2.webp';
-import latestProduct3 from '../assets/latestProduct3.webp';
-import latestProduct4 from '../assets/latestProduct4.webp';
-import latestProduct5 from '../assets/latestProduct5.webp';
-
-import TopSeller1 from '../assets/Topseller1.jpg';
-import TopSeller2 from '../assets/Topseller2.jpg';
-import TopSeller3 from '../assets/Topseller3.jpg';
-import TopSeller4 from '../assets/Topseller4.jpg';
-import TopSeller5 from '../assets/Topseller5.jpg';
-import TopSeller6 from '../assets/Topseller6.jpg';
-import TopSeller7 from '../assets/Topseller7.jpg';
-import TopSeller8 from '../assets/Topseller8.jpg';
-
 import Navbar from '@/components/Navbar';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper/modules';
@@ -59,105 +44,6 @@ export default function Home() {
       image: slider2
     }
   ]
-
-  /*  const products = [
-     {
-       _id: 1,
-       sale: 0,
-       title: 'ÁO PHÔNG',
-       price: 50000,
-       description: "ÁO PHÔNG abcdef",
-       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
-       size: ["size2", "size4"],
-       inventory: 10,
-       color: ["#fff", "#000"],
-       tag: "ao, ao phong"
-     },
-     {
-       _id: 2,
-       sale: 0,
-       title: 'ÁO PHÔNG',
-       price: 50000,
-       description: "ÁO PHÔNG abcdef",
-       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
-       size: ["size2", "size4"],
-       inventory: 10,
-       color: ["#fff", "#000"],
-       tag: "ao, ao phong"
-     },
-     {
-       _id: 3,
-       sale: 0,
-       title: 'ÁO PHÔNG',
-       price: 50000,
-       description: "ÁO PHÔNG abcdef",
-       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
-       size: ["size2", "size4"],
-       inventory: 10,
-       color: ["#fff", "#000"],
-       tag: "ao, ao phong"
-     },
-     {
-       _id: 4,
-       sale: 0,
-       title: 'ÁO PHÔNG',
-       price: 50000,
-       description: "ÁO PHÔNG abcdef",
-       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
-       size: ["size2", "size4"],
-       inventory: 10,
-       color: ["#fff", "#000"],
-       tag: "ao, ao phong"
-     },
-     {
-       _id: 5,
-       sale: 0,
-       title: 'ÁO PHÔNG',
-       price: 50000,
-       description: "ÁO PHÔNG abcdef",
-       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
-       size: ["size2", "size4"],
-       inventory: 10,
-       color: ["#fff", "#000"],
-       tag: "ao, ao phong"
-     },
-     {
-       _id: 6,
-       sale: 0,
-       title: 'ÁO PHÔNG',
-       price: 50000,
-       description: "ÁO PHÔNG abcdef",
-       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
-       size: ["size2", "size4"],
-       inventory: 10,
-       color: ["#fff", "#000"],
-       tag: "ao, ao phong"
-     },
-     {
-       _id: 7,
-       sale: 0,
-       title: 'ÁO PHÔNG',
-       price: 50000,
-       description: "ÁO PHÔNG abcdef",
-       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
-       size: ["size2", "size4"],
-       inventory: 10,
-       color: ["#fff", "#000"],
-       tag: "ao, ao phong"
-     },
-     {
-       _id: 8,
-       sale: 0,
-       title: 'ÁO PHÔNG',
-       price: 50000,
-       description: "ÁO PHÔNG abcdef",
-       image: [latestProduct1, latestProduct2, latestProduct3, latestProduct4],
-       size: ["size2", "size4"],
-       inventory: 10,
-       color: ["#fff", "#000"],
-       tag: "ao, ao phong"
-     }
-   ] */
 
   const getAllProducts = async () => {
     try {
@@ -279,15 +165,6 @@ export default function Home() {
                 ))}
               </Swiper>
             </section>
-            {/*   <section>
-              <h2 className='my-[40px] md:my-[60px] text-[28px] text-center md:text-[36px] font-bold'>SẢN PHẨM BÁN CHẠY</h2>
-              <div className='grid grid-cols-2 gap-[5px] md:gap-5 md:grid-cols-4'>
-                {productsData.slice(8, 16).map((item, index) => (
-                  <ProductCard key={index} data={item} />
-                ))}
-
-              </div>
-            </section> */}
             <section>
               <h2 className='my-[40px] md:my-[60px] text-[28px] text-center md:text-[36px] font-bold'>SẢN PHẨM BÁN CHẠY</h2>
 

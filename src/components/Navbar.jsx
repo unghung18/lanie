@@ -5,16 +5,16 @@ import Link from 'next/link';
 import { CiShoppingCart } from "react-icons/ci";
 import { AiOutlineMenu, AiOutlineClose, AiFillHome } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
+import { MdProductionQuantityLimits } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux';
 
 import Image from 'next/image';
 import avatar from '../../public/next.svg';
-import { cartActions } from '@/redux/features/cartSlice';
+import { cartActions } from '@/redux/slices/cartSlice';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
-    const [showProfile, setShowProfile] = useState(false);
     const [showNav, setShowNav] = useState(false);
     const [qty, setQty] = useState(null);
     const [cartProducts, setCartProducts] = useState([]);
@@ -41,7 +41,7 @@ const Navbar = () => {
 
 
     return (
-        <div className='fixed top-0 left-0 right-0 z-50 bg-white shadow-md'>
+        <div className='fixed top-0 left-0 right-0 bg-white shadow-md z-[1000]'>
             <div className='flex items-center justify-between py-4 relative px-5 max-w-[1280px] mx-auto'>
                 <div className='flex items-center space-x-10 lg:space-x-20'>
                     <div className='font-semibold text-2xl'>
@@ -58,11 +58,15 @@ const Navbar = () => {
                 </div>
                 <div className='flex items-center space-x-4'>
                     <SearchBar />
-                    <div onClick={() => setShowProfile(!showProfile)} className='relative cursor-pointer'>
+                    <div className='relative cursor-pointer group'>
                         <Image src={avatar} width={35} height={35} alt="avatar" className=' w-[35px] h-[35px] rounded-full object-cover' />
-                        <div className={`${showProfile ? "" : "hidden"} absolute bg-white z-20 rounded-lg shadow-lg`}>
-                            <p>{session.data?.user.name}</p>
+                        <div className="absolute hidden px-3 py-2 space-y-2 bg-white z-20 rounded-lg group-hover:md:block top-[calc(100%+10px)] right-[-10px] shadow-[1px_1px_5px_5px_rgba(0,0,0,0.1)] w-[350px] before:content-[''] before:w-[46px] before:h-[20px] before:bg-transparent before:absolute before:top-[-20px] before:right-0">
+                            {session &&
+                                <>
+                                    <p>Xin chao: {session.data?.user.name}</p><hr />
+                                </>}
                             <Link href="/login">Login</Link>
+                            <hr />
                             <div onClick={handleSignOut}>Sign Out</div>
                         </div>
                     </div>
@@ -71,7 +75,7 @@ const Navbar = () => {
                         <CiShoppingCart size={20} />
                         <div className='absolute hidden bg-white rounded-sm group-hover:md:block top-[calc(100%+10px)] right-[-10px] shadow-[1px_1px_5px_5px_rgba(0,0,0,0.1)] w-[350px] before:content-[""] before:w-[46px] before:h-[20px] before:bg-transparent before:absolute before:top-[-20px] before:right-0'>
                             {cartProducts.length === 0 ?
-                                <div>
+                                <div className='h-[300px] flex-center'>
                                     Giỏ hàng trống
                                 </div>
                                 :
@@ -135,27 +139,21 @@ const Navbar = () => {
                         </Link>
                     </li>
                     <li className='py-3 px-2 w-full'>
-                        <Link href="" className='flex items-center space-x-2'>
-                            <AiFillHome size={20} color='#757575' />
-                            <p className='mt-1'>Trang chủ</p>
+                        <Link href="/products" className='flex items-center space-x-2'>
+                            <MdProductionQuantityLimits size={20} color='#757575' />
+                            <p className='mt-1'>Sản phẩm</p>
                         </Link>
                     </li>
                     <li className='py-3 px-2 w-full'>
-                        <Link href="" className='flex items-center space-x-2'>
+                        <Link href="/login" className='flex items-center space-x-2'>
                             <AiFillHome size={20} color='#757575' />
-                            <p className='mt-1'>Trang chủ</p>
-                        </Link>
-                    </li>
-                    <li className='py-3 px-2 w-full'>
-                        <Link href="" className='flex items-center space-x-2'>
-                            <AiFillHome size={20} color='#757575' />
-                            <p className='mt-1'>Trang chủ</p>
+                            <p className='mt-1'>Login</p>
                         </Link>
                     </li>
                 </ul>
 
             </div>
-        </div>
+        </div >
     )
 }
 

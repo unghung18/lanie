@@ -158,7 +158,7 @@ const Products = () => {
     return (
         <div className='flex'>
             <div className='relative'>
-                <div className={`md:w-[300px] border-l-[0.5px] border-r-[0.5px] ${showFilter ? "max-md:w-[250px]" : "w-0 max-md:invisible"}`}>
+                <div className={`md:w-[300px] border-l-[0.5px] border-r-[0.5px] max-md:absolute z-50 bg-white h-full ${showFilter ? "max-md:w-[250px]" : "w-0 max-md:invisible"}`}>
                     <div className='flex items-center justify-between px-5 py-4 border-b-[0.5px]'>
                         <h1 className='text-neutral-800'>Filters</h1>
                         <BsSliders2Vertical size={20} className='text-neutral-600' />
@@ -349,10 +349,10 @@ const Products = () => {
                         </ul>
                     </div>
                 </div>
-                <div onClick={() => setShowFilter(!showFilter)} className='absolute md:hidden top-[20px] right-[-42px] rotate-90 bg-gray-100 px-2 rounded-t-sm cursor-pointer'>Filters</div>
+                <div onClick={() => setShowFilter(!showFilter)} className={`${showFilter ? "top-[20px] right-[-292px]" : "top-[20px] right-[-42px]"} absolute md:hidden  z-50 rotate-90 bg-gray-400 text-white px-2 rounded-t-sm cursor-pointer`}>Filters</div>
             </div>
             <div className='flex-1 p-6'>
-                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3'>
+                <div className='grid grid-cols-2 lg:grid-cols-3 gap-3'>
                     {products.map((item) => (
                         <ProductCard data={item} key={item._id} />
                     ))}

@@ -50,21 +50,6 @@ const Page = () => {
         })
     }
 
-    const handleFile = (e) => {
-        var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-
-        reader.onload = () => {
-            const image = product.image
-            image.push(reader.result)
-            setProduct({ ...product, image: image })
-        }
-
-        reader.onerror = (error) => {
-            console.log("Error: ", error)
-        }
-    }
-
     const onupload = (result) => {
         const newImageUrl = result.info.secure_url
         const image = product.image
