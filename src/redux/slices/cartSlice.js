@@ -36,21 +36,17 @@ const cartSlice = createSlice({
         // =========== add item ============
         addItem(state, action) {
             const newItem = action.payload;
+            console.log(newItem)
             const existingItem = state.cartItems.find(
-                (item) => item.id === newItem.id
+                (item) => item._id == newItem._id
             );
             state.totalQuantity++;
 
             if (!existingItem) {
-                // ===== note: if you use just redux you should not mute state array instead of clone the state array, but if you use redux toolkit that will not a problem because redux toolkit clone the array behind the scene
-
                 state.cartItems.push({
-                    id: newItem.id,
-                    name: newItem.name,
-                    image: newItem.image,
-                    price: newItem.price,
+                    ...newItem,
                     quantity: 1,
-                    totalPrice: newItem.price,
+                    totalPrice: newItem.price
                 });
             } else {
                 existingItem.quantity++;
@@ -74,11 +70,11 @@ const cartSlice = createSlice({
 
         removeItem(state, action) {
             const id = action.payload;
-            const existingItem = state.cartItems.find((item) => item.id === id);
+            const existingItem = state.cartItems.find((item) => item._id == id);
             state.totalQuantity--;
 
             if (existingItem.quantity === 1) {
-                state.cartItems = state.cartItems.filter((item) => item.id !== id);
+                state.cartItems = state.cartItems.filter((item) => item._id !== id);
             } else {
                 existingItem.quantity--;
                 existingItem.totalPrice =
@@ -101,10 +97,10 @@ const cartSlice = createSlice({
 
         deleteItem(state, action) {
             const id = action.payload;
-            const existingItem = state.cartItems.find((item) => item.id === id);
+            const existingItem = state.cartItems.find((item) => item._id === id);
 
             if (existingItem) {
-                state.cartItems = state.cartItems.filter((item) => item.id !== id);
+                state.cartItems = state.cartItems.filter((item) => item._id !== id);
                 state.totalQuantity = state.totalQuantity - existingItem.quantity;
             }
 

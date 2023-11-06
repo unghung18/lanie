@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 
 import { BsSliders2Vertical, BsChevronUp } from "react-icons/bs";
 
-const Products = () => {
+const Sale = () => {
     const [showFilter, setShowFilter] = useState(true);
     const [products, setProducts] = useState([])
 
@@ -117,7 +117,7 @@ const Products = () => {
         checkboxes.forEach((item) => {
             item.checked = false;
         });
-        router.push("/products")
+        router.push("/sale")
     }
 
     function checkHandler(checkBoxType, checkBoxValue) {
@@ -135,7 +135,7 @@ const Products = () => {
             if (typeof window !== "undefined") {
                 queryParams = new URLSearchParams(window.location.search);
             }
-            const res = await fetch(`/api/product/search?${queryParams.toString()}`, {
+            const res = await fetch(`/api/product/sale?${queryParams.toString()}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -355,4 +355,4 @@ const Products = () => {
     )
 }
 
-export default Products
+export default Sale

@@ -55,7 +55,6 @@ export default function Home() {
       })
       const data = await res.json()
       if (data.success) {
-        console.log(data)
         setProducts(data.data)
       }
       else {
@@ -68,6 +67,7 @@ export default function Home() {
   useEffect(() => {
     getAllProducts();
   }, []);
+
   return (
     <>
       <div className='overflow-hidden cursor-pointer'>
@@ -107,7 +107,7 @@ export default function Home() {
                           <p className='text-[14px]'>XEM NGAY</p>
                         </div>
                       </div>
-                      <Link href="/" className={`py-2 px-3 rounded-lg border-white border-[1px] border-solid inline-block text-white ml-3 relative transition-all !duration-500 delay-[800ms] ${isActive ? "top-0 opacity-100" : "top-[50px] opacity-0"}`}>SHOP NOW</Link>
+                      <Link href="/products" className={`py-2 px-3 rounded-lg border-white border-[1px] border-solid inline-block text-white ml-3 relative transition-all !duration-500 delay-[800ms] ${isActive ? "top-0 opacity-100" : "top-[50px] opacity-0"}`}>SHOP NOW</Link>
                     </div>
                   </>
                 )}
