@@ -129,7 +129,7 @@ const Navbar = () => {
                                             <p className='font-bold text-xs'>THANH TOÁN: </p>
                                             <p>{totalPayment?.toLocaleString()}₫</p>
                                         </div>
-                                        <Link href="" className='w-full bg-black text-white p-2 flex-center my-2 rounded-sm'>THANH TOÁN NGAY</Link>
+                                        <Link href="/payment" className='w-full bg-black text-white p-2 flex-center my-2 rounded-sm'>THANH TOÁN NGAY</Link>
                                         <Link href="/cart" className='w-full border-black border-[1px] p-2 flex-center rounded-sm'>XEM GIỎ HÀNG</Link>
                                     </div>
                                 </>

@@ -1,61 +1,120 @@
 'use client'
-import { useSession } from 'next-auth/react';
-import React from 'react';
-import { redirect } from 'next/navigation';
+import axios from 'axios';
+import React, { use, useEffect, useState } from 'react';
 import { BiSolidDownArrow } from "react-icons/bi";
 
 const Page = () => {
-    const session = useSession();
-    if (session.status === "unauthenticated") {
-        redirect("/login")
+
+    const [divisons, setDivisions] = useState([]);
+    const [districts, setDistricts] = useState([]);
+    const [wards, setWards] = useState([]);
+    const [deliveryMethod, setDeliveryMethod] = useState("1");
+    const [paymentMethod, setPaymentMethod] = useState("1");
+
+    const getAllDivisions = async () => {
+        try {
+            const res = await axios.get("https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json")
+            console.log(res.data)
+            setDivisions(res.data)
+        } catch (error) {
+            console.log(error)
+        }
     }
+
+    const onChangeDelivaryMethod = (event) => {
+        setDeliveryMethod(event.target.value);
+    }
+    const onChangePaymentMethod = (event) => {
+        setPaymentMethod(event.target.value);
+    }
+
+    const handleChangeProvince = async (e) => {
+        if (e.target.value !== "default") {
+            const result = divisons.filter(item => item.Id == e.target.value);
+            setDistricts(result[0].Districts);
+        }
+    }
+    const handleChangeDistrict = async (e) => {
+        if (e.target.value !== "default") {
+            const result = districts.filter(item => item.Id == e.target.value);
+            setWards(result[0].Wards);
+        }
+    }
+
+    useEffect(() => {
+        getAllDivisions();
+    }, []);
+
     return (
-        <div className='px-5 max-w-[1280px] mx-auto grid grid-cols-2 gap-5 py-10'>
-            <form className=' space-y-3'>
+        <div className='px-40 max-w-[1280px] mx-auto grid grid-cols-10 gap-5 py-10 bg-slate-100'>
+            <div className=' space-y-3 col-span-7 bg-white py-4 px-5'>
+                <h2>Thông tin thanh toán</h2>
                 <input type="text" placeholder='Họ và tên' className='w-full placeholder:font-extralight placeholder:text-gray-500 outline-none border-2 p-2 rounded-md border-gray-400 text-[#333333] shadow-sm focus:border-[#338dbc] focus:border-2' />
                 <div className='grid grid-cols-10'>
-                    <input type="text" placeholder='Email' className='col-span-7 placeholder:font-extralight placeholder:text-gray-500 outline-none border p-2 rounded-md border-gray-400 mr-3 text-[#333333] shadow-sm focus:border-[#338dbc] focus:border-2' />
-                    <input type="text" placeholder='Điện thoại' className='col-span-3 placeholder:font-extralight placeholder:text-gray-500 outline-none border p-2 rounded-md border-gray-400 text-[#333333] shadow-sm focus:border-[#338dbc] focus:border-2' />
+                    <input type="text" placeholder='Email' className='col-span-7 placeholder:font-extralight placeholder:text-gray-500 outline-none border-2 p-2 rounded-md border-gray-400 mr-3 text-[#333333] shadow-sm focus:border-[#338dbc] focus:border-2' />
+                    <input type="text" placeholder='Điện thoại' className='col-span-3 placeholder:font-extralight placeholder:text-gray-500 outline-none border-2 p-2 rounded-md border-gray-400 text-[#333333] shadow-sm focus:border-[#338dbc] focus:border-2' />
                 </div>
-                <input type="text" placeholder='Địa chỉ' className='w-full placeholder:font-extralight placeholder:text-gray-500 outline-none border p-2 rounded-md border-gray-400 text-[#333333] shadow-sm focus:border-[#338dbc] focus:border-2' />
+                <input type="text" placeholder='Địa chỉ' className='w-full placeholder:font-extralight placeholder:text-gray-500 outline-none border-2 p-2 rounded-md border-gray-400 text-[#333333] shadow-sm focus:border-[#338dbc] focus:border-2' />
                 <div className='grid grid-cols-3 gap-5'>
-                    <div className='p-2 border rounded-md border-gray-400 flex items-center space-x-3 focus:border-[#338dbc] focus:border-2'>
-                        <div className='flex flex-col'>
+                    <div className='p-2 border rounded-md border-gray-400 flex items-center'>
+                        <div className='flex flex-col w-full'>
                             <label htmlFor='city' className='text-gray-500 font-thin'>Tỉnh</label>
-                            <select id="city" className='outline-none'>
-                                <option value="" selected>Chọn tỉnh thành</option>
+                            <select id="city" className='outline-none' onChange={handleChangeProvince}>
+                                <option value="default">Chọn tỉnh thành</option>
+                                {divisons && divisons.map((e, i) => (
+                                    <option value={e.Id} key={e.Id}>{e.Name}</option>
+                                ))}
                             </select>
                         </div>
-                        <div className='w-[1px] h-7 bg-black'>
-                        </div>
-                        <BiSolidDownArrow color='#333' />
                     </div>
-                    <div htmlFor="district" className='p-2 border rounded-md border-gray-400 flex items-center space-x-3 target:border-[#338dbc]'>
-                        <div className='flex flex-col'>
+                    <div htmlFor="district" className='p-2 border rounded-md border-gray-400 flex items-center' onChange={handleChangeDistrict}>
+                        <div className='flex flex-col w-full'>
                             <label htmlFor='district' className='text-gray-500 font-thin'>Quận/Huyện</label>
                             <select id="district" className='outline-none'>
-                                <option value="" selected>Chọn quận huyện</option>
+                                <option value="">Chọn quận huyện</option>
+                                {districts && districts.map((e, i) => (
+                                    <option value={e.Id} key={e.Id}>{e.Name}</option>
+                                ))}
                             </select>
                         </div>
-                        <div className='w-[1px] h-7 bg-black'>
-                        </div>
-                        <BiSolidDownArrow color='#333' />
+
                     </div>
-                    <div className='p-2 border rounded-md border-gray-400 flex items-center space-x-3 focus:border-[#338dbc] focus:border-2'>
-                        <div className='flex flex-col'>
+                    <div className='p-2 border rounded-md border-gray-400 flex items-center'>
+                        <div className='flex flex-col w-full'>
                             <label htmlFor='ward' className='text-gray-500 font-thin'>Phường/Xã</label>
                             <select id="ward" className='outline-none'>
-                                <option value="" selected>Chọn phường xã</option>
+                                <option value="default">Chọn phường xã</option>
+                                {wards && wards.map((e, i) => (
+                                    <option value={e.Id} key={e.Id}>{e.Name}</option>
+                                ))}
                             </select>
                         </div>
-                        <div className='w-[1px] h-7 bg-black'>
-                        </div>
-                        <BiSolidDownArrow color='#333' />
                     </div>
                 </div>
-            </form>
-            <div>
+                <h3>Chọn phương thức giao hàng</h3>
+                <div className='grid grid-cols-1 gap-5'>
+                    <div className='bg-[rgb(240,248,255)] p-5 border border-[#99CCFF] rounded-md'>
+                        <div className=''>
+                            <input onChange={onChangeDelivaryMethod} id='delivery1' type="radio" value="1" name="delivery" checked={deliveryMethod === "1"} />
+                            <label htmlFor="delivery1"><strong className=' text-yellow-500 ml-3'>FAST</strong> Giao hàng tiết kiệm</label><br />
+                            <input onChange={onChangeDelivaryMethod} id='delivery2' type="radio" value="2" name="delivery" checked={deliveryMethod === "2"} />
+                            <label htmlFor="delivery2"><strong className=' text-yellow-500 ml-3'>GO_JEK</strong> Giao hàng nhanh chóng</label><br />
+                        </div>
+                    </div>
+                    <h3>Chọn phương thức thanh toán</h3>
+                    <div className='bg-[#F0F8FF] p-5 border border-[#99CCFF] rounded-md'>
+                        <div className=''>
+                            <input onChange={onChangePaymentMethod} id='1' type="radio" value="2" name="payment" checked={paymentMethod === "2"} />
+                            <label className='ml-3' htmlFor="payment2">Thanh toán khi nhận thẻ tín dụng</label><br />
 
+                            <input onChange={onChangePaymentMethod} id='2' type="radio" value="1" name="payment" checked={paymentMethod === "1"} />
+                            <label className='ml-3' htmlFor="payment1">Thanh toán tiền mặt khi nhận hàng</label><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className='col-span-3 p-5 bg-white max-h-[400px]'>
+                a
             </div>
         </div>
     )

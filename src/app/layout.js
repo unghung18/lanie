@@ -12,7 +12,7 @@ import { getServerSession } from 'next-auth';
 
 const josefin = Josefin_Sans({
   subsets: ['latin'],
-  weight: ['500', '600', '700']
+  weight: ['400', '500', '600', '700']
 })
 
 export const metadata = {

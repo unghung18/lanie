@@ -7,10 +7,14 @@ import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { cartActions } from '@/redux/slices/cartSlice';
 import a from '../../../assets/emptycart.png';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
     const [cartProducts, setCartProducts] = useState([])
+
     const dispatch = useDispatch();
+    const router = useRouter();
+
     const { cartItems, totalAmount, totalQuantity } = useSelector((state) => state.cart);
 
 
@@ -100,7 +104,7 @@ const Page = () => {
                                             <span className='fw-6'>Tổng cộng: </span>
                                             <span className='fw-6'>{totalAmount.toLocaleString()}₫</span>
                                         </div>
-                                        <div className='w-full'>
+                                        <div className='w-full' onClick={() => router.push('/payment')}>
                                             <button type="button" className='py-3 px-4 inline-block rounded-md bg-yellow-400 text-white hover:text-white hover:bg-black w-full'>Tiến hành thanh toán</button>
                                         </div>
                                     </div>

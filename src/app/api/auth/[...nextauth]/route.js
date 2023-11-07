@@ -6,6 +6,9 @@ import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
+    pages: {
+        signIn: '/login'
+    },
     providers: [
         Credentials({
             name: "credentials",
