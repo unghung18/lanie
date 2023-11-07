@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { BsSliders2Vertical, BsChevronUp } from "react-icons/bs";
 
 const Sale = () => {
-    const [showFilter, setShowFilter] = useState(true);
+    const [showFilter, setShowFilter] = useState(false);
     const [products, setProducts] = useState([])
 
     const router = useRouter();

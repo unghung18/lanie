@@ -93,7 +93,7 @@ const Navbar = () => {
                             }
                         </div>
                     </div>
-                    <div className='p-2 bg-gray-100 rounded-full relative group'>
+                    <div className='p-2 bg-gray-100 rounded-full relative group' onClick={() => router.push('/cart')}>
                         <div className='absolute top-[-5px] right-[0] w-[14px] h-[14px] rounded-full flex-center text-xs bg-[#f51167] text-white'>{qty && qty}</div>
                         <CiShoppingCart size={20} />
                         <div className='absolute hidden bg-white rounded-sm group-hover:md:block top-[calc(100%+10px)] right-[-10px] shadow-[1px_1px_5px_5px_rgba(0,0,0,0.1)] w-[350px] before:content-[""] before:w-[46px] before:h-[20px] before:bg-transparent before:absolute before:top-[-20px] before:right-0'>
