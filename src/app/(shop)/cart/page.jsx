@@ -24,7 +24,7 @@ const Page = () => {
     }, [cartItems, totalAmount, totalQuantity]);
 
     return (
-        <div className='py-5 bg-slate-100'>
+        <div className='py-5 bg-[#f5f5fa]'>
             <div className='max-w-[1280px] mx-auto px-5'>
                 <div className='text-[20px'>
                     <h3 className="text-uppercase font-bold text-[20xp] mb-5">My Cart</h3>
@@ -38,7 +38,7 @@ const Page = () => {
                                         {
                                             cartProducts.map(cartProduct => (
                                                 <div className='pb-5 border-b border-black gap-5 flex' key={cartProduct._id}>
-                                                    <div className='flex flex-col items-center bg-slate-100'>
+                                                    <div className='flex flex-col items-center bg-[#f5f5fa]'>
                                                         <img src={cartProduct.image[0]} alt={cartProduct.title} className='w-[100px]' />
                                                         <button type="button" className='my-3 p-2 border' onClick={() => dispatch(cartActions.deleteItem(cartProduct._id))}>
                                                             <BsTrash size={20} />
@@ -104,8 +104,8 @@ const Page = () => {
                                             <span className='fw-6'>Tổng cộng: </span>
                                             <span className='fw-6'>{totalAmount.toLocaleString()}₫</span>
                                         </div>
-                                        <div className='w-full' onClick={() => router.push('/payment')}>
-                                            <button type="button" className='py-3 px-4 inline-block rounded-md bg-yellow-400 text-white hover:text-white hover:bg-black w-full'>Tiến hành thanh toán</button>
+                                        <div className='w-full' onClick={() => router.push('/checkout')}>
+                                            <button type="button" className='py-3 px-4 inline-block rounded-md bg-black text-white hover:text-white hover:bg-yellow-400 w-full'>Tiến hành thanh toán</button>
                                         </div>
                                     </div>
                                 </div>

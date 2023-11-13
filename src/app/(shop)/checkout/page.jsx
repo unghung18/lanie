@@ -1,7 +1,7 @@
 'use client'
 import axios from 'axios';
-import React, { use, useEffect, useState } from 'react';
-import { BiSolidDownArrow } from "react-icons/bi";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Page = () => {
 
@@ -10,6 +10,8 @@ const Page = () => {
     const [wards, setWards] = useState([]);
     const [deliveryMethod, setDeliveryMethod] = useState("1");
     const [paymentMethod, setPaymentMethod] = useState("1");
+
+    const { totalAmount } = useSelector(state => state.cart);
 
     const getAllDivisions = async () => {
         try {
@@ -46,7 +48,7 @@ const Page = () => {
     }, []);
 
     return (
-        <div className='px-40 max-w-[1280px] mx-auto grid grid-cols-10 gap-5 py-10 bg-slate-100'>
+        <div className='px-5 md:px-10 lg:px-40 max-w-[1280px] mx-auto grid md:grid-cols-10 gap-5 py-10 bg-slate-100 grid-cols-1'>
             <div className=' space-y-3 col-span-7 bg-white py-4 px-5'>
                 <h2>Thông tin thanh toán</h2>
                 <input type="text" placeholder='Họ và tên' className='w-full placeholder:font-extralight placeholder:text-gray-500 outline-none border-2 p-2 rounded-md border-gray-400 text-[#333333] shadow-sm focus:border-[#338dbc] focus:border-2' />
@@ -91,8 +93,8 @@ const Page = () => {
                         </div>
                     </div>
                 </div>
-                <h3>Chọn phương thức giao hàng</h3>
                 <div className='grid grid-cols-1 gap-5'>
+                    <h3>Chọn phương thức giao hàng</h3>
                     <div className='bg-[rgb(240,248,255)] p-5 border border-[#99CCFF] rounded-md'>
                         <div className=''>
                             <input onChange={onChangeDelivaryMethod} id='delivery1' type="radio" value="1" name="delivery" checked={deliveryMethod === "1"} />
@@ -113,8 +115,34 @@ const Page = () => {
                     </div>
                 </div>
             </div>
-            <div className='col-span-3 p-5 bg-white max-h-[400px]'>
-                a
+            <div className='col-span-3 max-h-[400px] flex flex-col gap-1'>
+                <div className='bg-white rounded-lg p-5'>
+                    <div>Địa chỉ: </div>
+                    <div>
+                        <div className='flex justify-between items-center'>
+                            <p>Tạm tính</p>
+                            <strong>{totalAmount.toLocaleString()} VND</strong>
+                        </div>
+                        <div className='flex justify-between items-center'>
+                            <p>Giảm giá</p>
+                            <strong>0 VND</strong>
+                        </div>
+                        <div className='flex justify-between items-center'>
+                            <p>Phí giao hàng</p>
+                            <strong>0 VND</strong>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Tổng tiền</p>
+                        <div className='text-center text-red-500'>
+                            <strong>{totalAmount.toLocaleString()} VND</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='flex-center py-3 px-2 bg-white cursor-pointer'>
+                    Đặt hàng
+                </div>
             </div>
         </div>
     )
