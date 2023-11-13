@@ -10,6 +10,7 @@ const Page = () => {
     const [wards, setWards] = useState([]);
     const [deliveryMethod, setDeliveryMethod] = useState("1");
     const [paymentMethod, setPaymentMethod] = useState("1");
+    const [totalPayment, setTotalPayment] = useState(null);
 
     const { totalAmount } = useSelector(state => state.cart);
 
@@ -46,6 +47,10 @@ const Page = () => {
     useEffect(() => {
         getAllDivisions();
     }, []);
+
+    useEffect(() => {
+        setTotalPayment(totalAmount)
+    }, [totalAmount]);
 
     return (
         <div className='px-5 md:px-10 lg:px-40 max-w-[1280px] mx-auto grid md:grid-cols-10 gap-5 py-10 bg-slate-100 grid-cols-1'>
@@ -121,7 +126,7 @@ const Page = () => {
                     <div>
                         <div className='flex justify-between items-center'>
                             <p>Tạm tính</p>
-                            <strong>{totalAmount.toLocaleString()} VND</strong>
+                            <strong>{totalPayment?.toLocaleString()} VND</strong>
                         </div>
                         <div className='flex justify-between items-center'>
                             <p>Giảm giá</p>
@@ -135,7 +140,7 @@ const Page = () => {
                     <div>
                         <p>Tổng tiền</p>
                         <div className='text-center text-red-500'>
-                            <strong>{totalAmount.toLocaleString()} VND</strong>
+                            <strong>{totalPayment?.toLocaleString()} VND</strong>
                         </div>
                     </div>
                 </div>

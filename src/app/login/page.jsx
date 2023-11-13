@@ -41,10 +41,10 @@ const Login = () => {
 
     }
     useEffect(() => {
-        /*  console.log(session);
-         if (session?.status == "authenticated") {
-             router.push("/")
-         } */
+        console.log(session);
+        if (session?.status == "authenticated") {
+            router.push("/")
+        }
     }, [session]);
     return (
         <section className="bg-gray-50 min-h-screen flex items-center justify-center">

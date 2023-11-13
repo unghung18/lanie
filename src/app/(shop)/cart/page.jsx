@@ -1,12 +1,9 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from "next/link";
 import { BsTrash } from 'react-icons/bs';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { cartActions } from '@/redux/slices/cartSlice';
-import a from '../../../assets/emptycart.png';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 const Page = () => {

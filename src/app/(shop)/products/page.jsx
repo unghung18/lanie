@@ -16,6 +16,7 @@ const Products = () => {
     const size = SearchParams.get("size");
     const price = SearchParams.get("price");
     const color = SearchParams.get("color");
+    const query = SearchParams.get("query");
 
 
     let queryParams;
@@ -135,6 +136,13 @@ const Products = () => {
             if (typeof window !== "undefined") {
                 queryParams = new URLSearchParams(window.location.search);
             }
+
+            const checkboxes = document.getElementsByName("price");
+
+            checkboxes.forEach((item) => {
+                item.checked = false;
+            });
+
             const res = await fetch(`/api/product/search?${queryParams.toString()}`, {
                 method: "POST",
                 headers: {
@@ -142,7 +150,6 @@ const Products = () => {
                 },
             })
             const data = await res.json()
-            console.log(data)
             if (data.success) {
                 setProducts(data.data)
             }
@@ -155,7 +162,7 @@ const Products = () => {
     }
     useEffect(() => {
         getAllProducts();
-    }, [category, price, size, color]);
+    }, [category, price, size, color, query]);
 
     return (
         <div className='flex'>

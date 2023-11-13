@@ -10,6 +10,7 @@ export const POST = async (request) => {
 
         const data = await Product.find({
             $and: [
+                { tag: { $regex: searchParams.get("query") ? searchParams.get("query") : "" } },
                 { tag: { $regex: searchParams.get("category") ? searchParams.get("category") : "" } },
                 searchParams.get("color") ? { color: { $all: [searchParams.get("color")] } } : {},
                 searchParams.get("size") ? { size: { $all: [searchParams.get("size")] } } : {},

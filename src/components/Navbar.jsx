@@ -21,6 +21,7 @@ const Navbar = () => {
     const [qty, setQty] = useState(null);
     const [cartProducts, setCartProducts] = useState([]);
     const [totalPayment, setTotalPayment] = useState(null);
+    const [querySearch, setQuerySearch] = useState();
 
     const dispatch = useDispatch();
     const session = useSession();
@@ -36,6 +37,10 @@ const Navbar = () => {
     const handleSignOut = async () => {
         await signOut({ redirect: false });
         setShowNav(false)
+    }
+
+    const handleChangeSearchInput = (e) => {
+        setQuerySearch(e.target.value)
     }
 
     useEffect(() => {
