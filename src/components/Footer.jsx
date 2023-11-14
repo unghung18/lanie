@@ -77,7 +77,7 @@ const Footer = () => {
                 </Link>
             </div>
             <div className='pt-[50px] text-white text-center'>
-                <p>Cory right ©2022 All rights reserved</p>
+                <p>Cory right ©2023 All rights reserved</p>
             </div>
         </div >
     )

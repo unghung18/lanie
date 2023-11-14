@@ -102,7 +102,7 @@ const Page = () => {
                                             <span className='fw-6'>{totalAmount.toLocaleString()}₫</span>
                                         </div>
                                         <div className='w-full' onClick={() => router.push('/checkout')}>
-                                            <button type="button" className='py-3 px-4 inline-block rounded-md bg-black text-white hover:text-white hover:bg-yellow-400 w-full'>Tiến hành thanh toán</button>
+                                            <button type="button" className='py-3 px-4 inline-block rounded-md bg-black opacity-80 text-white hover:text-white hover:opacity-100 w-full'>Tiến hành thanh toán</button>
                                         </div>
                                     </div>
                                 </div>

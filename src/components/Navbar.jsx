@@ -77,19 +77,18 @@ const Navbar = () => {
                 <div className='flex items-center space-x-4'>
                     <SearchBar />
                     <div className='relative cursor-pointer group'>
-                        <Image src={avatar} width={35} height={35} alt="avatar" className=' w-[35px] h-[35px] rounded-full object-cover' />
+                        <div className='w-[35px] h-[35px] rounded-full bg-slate-400 flex-center font-bold text-white text-lg'>{session.data?.user.name[0].toUpperCase()}</div>
                         <div className="absolute hidden py-2 space-y-2 bg-white z-20 rounded-lg group-hover:md:block top-[calc(100%+10px)] right-[-10px] shadow-[1px_1px_5px_5px_rgba(0,0,0,0.1)] w-[300px] before:content-[''] before:w-[46px] before:h-[20px] before:bg-transparent before:absolute before:top-[-20px] before:right-0">
                             {session.data &&
-                                <p className='px-5 mb-3 text-black'>Xin chào: {session.data?.user.name}</p>
-                            }
-                            {!session.data &&
-                                <Link href="/login" className='px-5 text-gray-500 hover:text-black'>Đăng nhập</Link>
-                            }
-                            {session.data &&
                                 <>
+                                    <p className='px-5 mb-3 text-black text-center'>Xin chào: {session.data?.user.name}</p>
+                                    <div className='px-5 mb-3 text-gray-500 hover:text-black'>Giỏ hàng của tôi</div>
                                     <hr />
                                     <div onClick={handleSignOut} className='text-center text-gray-500 hover:text-black'>Đăng xuất</div>
                                 </>
+                            }
+                            {!session.data &&
+                                <Link href="/login" className='px-5 text-gray-500 hover:text-black'>Đăng nhập</Link>
                             }
                         </div>
                     </div>

@@ -13,7 +13,6 @@ export const POST = async (request) => {
     const orderRequest = new paypal.orders.OrdersCreateRequest();
 
     const reqData = await request.json()
-    console.log(reqData)
 
     /*  const result = reqData.map((e) => {
          return {
