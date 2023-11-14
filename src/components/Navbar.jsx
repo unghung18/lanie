@@ -21,7 +21,6 @@ const Navbar = () => {
     const [qty, setQty] = useState(null);
     const [cartProducts, setCartProducts] = useState([]);
     const [totalPayment, setTotalPayment] = useState(null);
-    const [querySearch, setQuerySearch] = useState();
 
     const dispatch = useDispatch();
     const session = useSession();
@@ -37,10 +36,6 @@ const Navbar = () => {
     const handleSignOut = async () => {
         await signOut({ redirect: false });
         setShowNav(false)
-    }
-
-    const handleChangeSearchInput = (e) => {
-        setQuerySearch(e.target.value)
     }
 
     useEffect(() => {
@@ -135,7 +130,7 @@ const Navbar = () => {
                                             <p>{totalPayment?.toLocaleString()}₫</p>
                                         </div>
 
-                                        <Link href="/checkout" className='w-full bg-black text-white mt-3 border-[1px] p-2 flex-center rounded-sm'>THANH TOÁN NGAY</Link>
+                                        <Link href="/checkout" className='w-full bg-black text-white mt-3 border-[1px] p-2 flex-center rounded-sm'>XEM GIỎ HÀNG</Link>
                                     </div>
                                 </>
                             }

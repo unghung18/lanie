@@ -23,13 +23,12 @@ export default function DashboardSidebarLayout({ children }) {
                                 </svg>
                             </button>
                             <Link href="/dashboard" className="flex ml-2 md:mr-24">
-                                <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="FlowBite Logo" />
-                                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
+                                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Lanie</span>
                             </Link>
                         </div>
                         <div className="group relative">
                             <button type="button" className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
-                                <img className="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo" />
+                                <img className="w-8 h-8 rounded-full" src="https://robohash.org/185481805cd25f2cdaff82732578ee35?set=set3&bgset=&size=400x400g" alt="user photo" />
                             </button>
                             <div className="absolute top-[50px] right-0 z-50 hidden group-hover:block my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600">
                                 <div className="px-4 py-3">

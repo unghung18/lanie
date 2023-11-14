@@ -137,12 +137,6 @@ const Products = () => {
                 queryParams = new URLSearchParams(window.location.search);
             }
 
-            const checkboxes = document.getElementsByName("price");
-
-            checkboxes.forEach((item) => {
-                item.checked = false;
-            });
-
             const res = await fetch(`/api/product/search?${queryParams.toString()}`, {
                 method: "POST",
                 headers: {
@@ -198,7 +192,7 @@ const Products = () => {
                             Chân váy
                         </span>
                         <span
-                            className={`py-3 px-5 cursor-pointer ${category == "pants" ? 'bg-purple-50' : ''}`}
+                            className={`py-3 px-5 cursor-pointer ${category == "dam" ? 'bg-purple-50' : ''}`}
                             onClick={() => handleCategory('dam')}
                         >
                             Đầm

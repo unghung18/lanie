@@ -122,7 +122,7 @@ const Page = ({ params }) => {
                             </div>
                             <div className='flex max-[930px]:space-y-3 space-y-0 space-x-3 max-[930px]:space-x-0 max-[930px]:flex-wrap text-center'>
                                 <div onClick={() => dispatch(cartActions.addItem(product))} className='py-2 px-3 rounded-lg border cursor-pointer bg-black text-white max-[930px]:w-full'>THÊM GIỎ HÀNG</div>
-                                <Link href="/payment" className='py-2 px-3 rounded-lg border cursor-pointer bg-black text-white max-[930px]:w-full'>MUA NGAY</Link>
+                                <Link href="/checkout" className='py-2 px-3 rounded-lg border cursor-pointer bg-black text-white max-[930px]:w-full'>MUA NGAY</Link>
                             </div>
                             <h3 className='font-bold mt-8 mb-3 text-[14px]'>Mô tả sản phẩm</h3>
                             <div className='text-neutral-500 text-sm'>{product.description}</div>

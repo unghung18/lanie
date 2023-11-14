@@ -68,8 +68,8 @@ const Page = () => {
                                             ))
                                         }
                                     </div>
-                                    <button type="button" className='my-5 bg-red-500 text-white py-2 px-4 rounded-lg' /* onClick={() => dispatch(clearCart())} */>
-                                        <span className="text-base">Clear Cart</span>
+                                    <button type="button" className='my-5 bg-red-500 text-white py-2 px-4 rounded-lg' onClick={() => router.push("/")}>
+                                        <span className="text-base">Tiếp tục mua hàng</span>
                                     </button>
                                 </div>
                                 <div className='bg-white my-6 rounded-lg'>

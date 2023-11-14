@@ -1,6 +1,7 @@
-import Product from "@/models/Product";
 import connectDb from "@/utils/db";
 import { NextResponse } from "next/server";
+import Collection from "@/models/Collection";
+import Product from "@/models/Product";
 
 export const POST = async (request) => {
     try {
@@ -8,18 +9,18 @@ export const POST = async (request) => {
 
         const reqData = await request.json()
 
-        const productData = await Product.create(reqData)
+        const collectionData = await Collection.create(reqData)
 
-        if (productData) {
+        if (collectionData) {
             return NextResponse.json({
                 success: true,
-                message: "Oke 1",
+                message: "Thêm thành công",
             }, { status: 201 })
         }
         else {
             return NextResponse.json({
                 success: false,
-                message: "Oke 2",
+                message: "Thêm thất bại",
             }, { status: 400 })
         }
 
@@ -36,11 +37,12 @@ export const GET = async () => {
     try {
         await connectDb()
 
-        const productData = await Product.find({})
+        const collectionData = await Collection.find().populate({ path: 'products', model: Product })
+
         return NextResponse.json({
             success: true,
-            message: "Oke 2",
-            data: productData
+            message: "Oke",
+            data: collectionData
         }, { status: 201 })
 
     } catch (error) {
