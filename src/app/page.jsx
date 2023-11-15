@@ -94,7 +94,7 @@ export default function Home() {
                 {({ isActive }) => (
                   <>
                     <Image src={slide.image} alt="avatar" className='object-cover h-full' />
-                    <div className="absolute mx-[30px] my-[50px] md:m-[100px] top-0 left-0">
+                    <div className="absolute mx-[30px] my-[100px] md:m-[100px] top-0 left-0">
                       <div className='flex justify-between items-center text-white'>
                         <div className='md:w-[50%]'>
                           <span className={`text-[18px] uppercase font-semibold tracking-[3px] mb-2 block relative transition-all !duration-500 delay-200 ${isActive ? "top-0 opacity-100" : "top-[50px] opacity-0"}`}>{slide.title}</span>

@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import SearchBar from './SearchBar';
 import Link from 'next/link';
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { CiShoppingCart } from "react-icons/ci";
 import { AiOutlineClose, AiFillHome } from "react-icons/ai";
 import { TbLogin2, TbLogout2 } from 'react-icons/tb'
@@ -10,8 +11,6 @@ import { BsCartDashFill } from "react-icons/bs"
 import { MdProductionQuantityLimits } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux';
 
-import Image from 'next/image';
-import avatar from '../../public/next.svg';
 import { cartActions } from '@/redux/slices/cartSlice';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter, usePathname } from 'next/navigation';
@@ -67,10 +66,22 @@ const Navbar = () => {
                     </div>
                     <nav className='max-md:hidden'>
                         <ul className='flex items-center lg:space-x-10 space-x-7 opacity-70 text-[15px]'>
-                            <li><Link href="/products" className='py-3 inline-block w-full hover:text-[#f51167]'>SẢN PHẨM</Link></li>
-                            <li><Link href="/sale" className='py-3 inline-block w-full hover:text-[#f51167]'>SALE</Link></li>
-                            <li><Link href="collections" className='py-3 inline-block w-full hover:text-[#f51167]'>BỘ SƯU TẬP</Link></li>
-                            <li><Link href="/contact" className='py-3 inline-block w-full hover:text-[#f51167]'>LIÊN HỆ</Link></li>
+                            <li><Link href="/products" className='relative py-3 inline-block w-full font-bold after:content-[""] after:absolute after:w-[0%] after:h-[1px] after:block after:transition-all after:bottom-[25%] hover:after:w-full hover:after:bg-[#f51167]'>SẢN PHẨM</Link></li>
+                            <li><Link href="collections" className='relative py-3 inline-block w-full font-bold after:content-[""] after:absolute after:w-[0%] after:h-[1px] after:block after:transition-all after:bottom-[25%] hover:after:w-full hover:after:bg-[#f51167]'>BỘ SƯU TẬP</Link></li>
+                            <li>
+                                <Link href="/sale" className='group relative py-3 font-bold inline-block w-full after:content-[""] after:absolute after:w-[0%] after:h-[1px] after:block after:transition-all after:bottom-[25%] hover:after:w-full hover:after:bg-[#f51167]'>
+                                    <div className='flex space-x-1'>
+                                        <p>SALE</p>
+                                        <FaChevronDown size={15} className='mt-[2px]' />
+                                    </div>
+
+                                    <div className='hidden md:block absolute top-[100%] space-y-2 left-[-20px] w-[170px] opacity-0 bg-black p-3 rounded-md text-white transition-all shadow-md mt-[50px] z-[9999] group-hover:opacity-100 group-hover:mt-0'>
+                                        <div className='p-2 rounded-sm hover:bg-white hover:text-black'>Sale up to 50%</div>
+                                        <div className='p-2 rounded-sm hover:bg-white hover:text-black'>Chỉ từ 199k</div>
+                                    </div>
+                                </Link>
+                            </li>
+                            <li><Link href="/contact" className='relative py-3 inline-block w-full font-bold after:content-[""] after:absolute after:w-[0%] after:h-[1px] after:block after:transition-all after:bottom-[25%] hover:after:w-full hover:after:bg-[#f51167]'>LIÊN HỆ</Link></li>
                         </ul>
                     </nav>
                 </div>
