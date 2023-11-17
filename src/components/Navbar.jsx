@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import SearchBar from './SearchBar';
 import Link from 'next/link';
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaChevronDown, FaRegUserCircle } from "react-icons/fa";
 import { CiShoppingCart } from "react-icons/ci";
 import { AiOutlineClose, AiFillHome } from "react-icons/ai";
 import { TbLogin2, TbLogout2 } from 'react-icons/tb'
@@ -75,7 +75,7 @@ const Navbar = () => {
                                         <FaChevronDown size={15} className='mt-[2px]' />
                                     </div>
 
-                                    <div className='hidden md:block absolute top-[100%] space-y-2 left-[-20px] w-[170px] opacity-0 bg-black p-3 rounded-md text-white transition-all shadow-md mt-[50px] z-[9999] group-hover:opacity-100 group-hover:mt-0'>
+                                    <div className=' invisible md:block absolute top-[100%] space-y-2 left-[-20px] w-[170px] opacity-0 bg-black p-3 rounded-md text-white transition-all shadow-md scale-75 z-[9999] group-hover:opacity-100 group-hover:scale-100 group-hover:visible'>
                                         <div className='p-2 rounded-sm hover:bg-white hover:text-black'>Sale up to 50%</div>
                                         <div className='p-2 rounded-sm hover:bg-white hover:text-black'>Chỉ từ 199k</div>
                                     </div>
@@ -88,11 +88,11 @@ const Navbar = () => {
                 <div className='flex items-center space-x-4'>
                     <SearchBar />
                     <div className='relative cursor-pointer group'>
-                        <div className='w-[35px] h-[35px] rounded-full bg-slate-400 flex-center font-bold text-white text-lg'>{session.data?.user.name[0].toUpperCase()}</div>
+                        <div className='w-[35px] h-[35px] rounded-full bg-slate-400 flex-center font-bold text-white text-lg'>{session.data ? session.data?.user.name[0].toUpperCase() : <FaRegUserCircle />}</div>
                         <div className="absolute hidden py-2 space-y-2 bg-white z-20 rounded-lg group-hover:md:block top-[calc(100%+10px)] right-[-10px] shadow-[1px_1px_5px_5px_rgba(0,0,0,0.1)] w-[300px] before:content-[''] before:w-[46px] before:h-[20px] before:bg-transparent before:absolute before:top-[-20px] before:right-0">
                             {session.data &&
                                 <>
-                                    <p className='px-5 mb-3 text-black text-center'>Xin chào: {session.data?.user.name}</p>
+                                    <p className='px-5 mb-3 text-black'>Xin chào: {session.data?.user.name}</p>
                                     <div className='px-5 mb-3 text-gray-500 hover:text-black'>Giỏ hàng của tôi</div>
                                     <hr />
                                     <div onClick={handleSignOut} className='text-center text-gray-500 hover:text-black'>Đăng xuất</div>
@@ -156,7 +156,6 @@ const Navbar = () => {
             <div className={`md:hidden top-0 right-0 absolute h-[100vh] flex w-full ease-in-out duration-500 ${showNav ? "w-full" : "w-0 invisible opacity-0"}`}>
                 <div className='flex-1'></div>
                 <div className={`grid grid-cols-1 py-20 space-y-5 bg-white shadow-2xl ease-in-out duration-500 h-[100vh] z-[999]  ${showNav ? "w-[260px] sm:w-[350px]" : "w-0 invisible opacity-0"}`} ref={menuRef}>
-
                     {session.data ?
                         <div className='flex items-center gap-5 mx-7'>
                             <div className='h-10 w-10 flex-center bg-gray-400 rounded-full text-white'>{session.data?.user.name[0].toLocaleUpperCase()}</div>
