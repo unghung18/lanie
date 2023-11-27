@@ -11,6 +11,7 @@ import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper/modules';
 import ProductCard from '@/components/ProductCard';
 import { useDispatch } from 'react-redux';
 import { cartActions } from '@/redux/slices/cartSlice';
+import Loader from '@/components/Loader';
 
 const Page = ({ params }) => {
 
@@ -18,10 +19,12 @@ const Page = ({ params }) => {
     const [similarProducts, setSimilarProducts] = useState([]);
     const [selectedSize, setSelectedSize] = useState(null);
     const [selectedColor, setSelectedColor] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
 
     const getProductData = async () => {
+        setLoading(true);
         try {
             const res = await fetch(`/api/product/${params.id}`, {
                 method: "POST",
@@ -36,12 +39,14 @@ const Page = ({ params }) => {
             else {
                 alert(data.message)
             }
+            setLoading(false);
         } catch (error) {
             alert(error)
         }
     }
 
     const getSimilarProducts = async () => {
+        setLoading(true);
         try {
             const res = await fetch("/api/product/latest-product", {
                 method: "GET",
@@ -57,6 +62,7 @@ const Page = ({ params }) => {
             else {
                 alert(data.message)
             }
+            setLoading(false);
         } catch (error) {
             alert(error)
         }
@@ -70,7 +76,8 @@ const Page = ({ params }) => {
 
     return (
         <>
-            {product &&
+            {loading ? <Loader /> :
+                product &&
                 <div>
                     <div className='max-w-[1280px] mx-auto flex gap-0 min-[850px]:gap-14 py-10 px-5 max-md:flex-col max-md:space-y-10'>
                         <ImageGallery imageUrls={product.image} />
@@ -164,7 +171,8 @@ const Page = ({ params }) => {
                             ))}
                         </Swiper>
                     </div>
-                </div>}
+                </div>
+            }
         </>
     )
 }

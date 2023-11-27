@@ -1,4 +1,5 @@
 'use client'
+import Loader from '@/components/Loader';
 import ProductCard from '@/components/ProductCard';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
@@ -7,7 +8,8 @@ import { BsSliders2Vertical, BsChevronUp } from "react-icons/bs";
 
 const Products = () => {
     const [showFilter, setShowFilter] = useState(false);
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const router = useRouter();
     const SearchParams = useSearchParams();
@@ -132,6 +134,7 @@ const Products = () => {
     }
 
     const getAllProducts = async () => {
+        setLoading(true);
         try {
             if (typeof window !== "undefined") {
                 queryParams = new URLSearchParams(window.location.search);
@@ -150,6 +153,7 @@ const Products = () => {
             else {
                 alert(data.message)
             }
+            setLoading(false);
         } catch (error) {
             alert(error)
         }
@@ -342,14 +346,16 @@ const Products = () => {
                 <div onClick={() => setShowFilter(!showFilter)} className={`${showFilter ? "top-[20px] right-[-292px]" : "top-[20px] right-[-42px]"} absolute md:hidden  z-50 rotate-90 bg-gray-400 text-white px-2 rounded-t-sm cursor-pointer`}>Filters</div>
             </div>
             <div className='flex-1 p-6'>
-                {products.length == 0 ?
-                    <div className='flex-center w-full'>Không tìm thấy sản phẩm nào</div>
-                    :
-                    <div className='grid grid-cols-2 lg:grid-cols-3 gap-3'>
-                        {products.map((item) => (
-                            <ProductCard data={item} key={item._id} />
-                        ))}
-                    </div>
+                {
+                    loading ? <Loader /> :
+                        products.length == 0 ?
+                            <div className='flex-center w-full'>Không tìm thấy sản phẩm nào</div>
+                            :
+                            <div className='grid grid-cols-2 lg:grid-cols-3 gap-3'>
+                                {products.map((item) => (
+                                    <ProductCard data={item} key={item._id} />
+                                ))}
+                            </div>
                 }
             </div>
         </div>
