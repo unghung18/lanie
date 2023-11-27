@@ -20,6 +20,7 @@ import Footer from "@/components/Footer";
 export default function Home() {
 
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const myslides = [
     {
@@ -46,6 +47,7 @@ export default function Home() {
   ]
 
   const getAllProducts = async () => {
+    setLoading(true);
 
     try {
       const res = await fetch("/api/product/latest-product", {
@@ -61,6 +63,7 @@ export default function Home() {
       else {
         alert(data.message)
       }
+      setLoading(false);
     } catch (error) {
       alert(error)
     }
@@ -134,38 +137,45 @@ export default function Home() {
           <div className='px-4 max-w-[1280px] mx-auto text-center'>
             <section>
               <h2 className='my-[40px] md:my-[60px] text-[28px] text-center md:text-[36px] font-bold'>SẢN PHẨM MỚI</h2>
-              <Suspense fallback={<div className="w-10 h-20 bg-black">...Loading</div>}>
-                <Swiper
-                  breakpoints={{
-                    1024: {
-                      spaceBetween: 30,
-                      slidesPerView: 4,
-                    },
-                    760: {
-                      spaceBetween: 20,
-                      slidesPerView: 3,
-                    },
-                    0: {
-                      spaceBetween: 5,
-                      slidesPerView: 2,
-                    },
-                  }}
-                  loop={true}
-                  navigation={true}
-                  autoplay={{
-                    disableOnInteraction: true,
-                    delay: 2000,
-                    stopOnLastSlide: false
-                  }}
-                  modules={[Navigation, Autoplay]}
-                >
-                  {products.map((item) => (
-                    <SwiperSlide key={item._id}>
-                      <ProductCard data={item} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </Suspense>
+              <Swiper
+                breakpoints={{
+                  1024: {
+                    spaceBetween: 30,
+                    slidesPerView: 4,
+                  },
+                  760: {
+                    spaceBetween: 20,
+                    slidesPerView: 3,
+                  },
+                  0: {
+                    spaceBetween: 5,
+                    slidesPerView: 2,
+                  },
+                }}
+                loop={true}
+                navigation={true}
+                autoplay={{
+                  disableOnInteraction: true,
+                  delay: 2000,
+                  stopOnLastSlide: false
+                }}
+                modules={[Navigation, Autoplay]}
+              >
+                {
+                  loading ?
+                    [1, 2, 3, 4, 5, 6, 7, 8].map((item, i) => (
+                      <SwiperSlide key={i}>
+                        <ProductCard />
+                      </SwiperSlide>
+                    ))
+                    :
+                    products.map((item) => (
+                      <SwiperSlide key={item._id}>
+                        <ProductCard data={item} />
+                      </SwiperSlide>
+                    ))
+                }
+              </Swiper>
             </section>
             <section>
               <h2 className='my-[40px] md:my-[60px] text-[28px] text-center md:text-[36px] font-bold'>SẢN PHẨM BÁN CHẠY</h2>
@@ -196,11 +206,20 @@ export default function Home() {
                 }}
                 modules={[Navigation, Autoplay]}
               >
-                {products.map((item) => (
-                  <SwiperSlide key={item._id}>
-                    <ProductCard data={item} />
-                  </SwiperSlide>
-                ))}
+                {
+                  loading ?
+                    [1, 2, 3, 4, 5, 6, 7, 8].map((item, i) => (
+                      <SwiperSlide key={i}>
+                        <ProductCard />
+                      </SwiperSlide>
+                    ))
+                    :
+                    products.map((item) => (
+                      <SwiperSlide key={item._id}>
+                        <ProductCard data={item} />
+                      </SwiperSlide>
+                    ))
+                }
               </Swiper>
             </section>
           </div>

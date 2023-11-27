@@ -41,7 +41,7 @@ const Page = () => {
 
     return (
         <>
-            {loading ? <Loader /> :
+            {loading ? <div className='w-full h-[calc(100vh-78.5px)]'><Loader /></div> :
                 <div className='py-10 px-5 max-w-[1280px] mx-auto space-y-20'>
                     {collections != null && collections.map((item) => (
                         <div key={item._id}>

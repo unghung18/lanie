@@ -76,7 +76,7 @@ const Page = ({ params }) => {
 
     return (
         <>
-            {loading ? <Loader /> :
+            {loading ? <div className='w-full h-[calc(100vh-78.5px)]'><Loader /></div> :
                 product &&
                 <div>
                     <div className='max-w-[1280px] mx-auto flex gap-0 min-[850px]:gap-14 py-10 px-5 max-md:flex-col max-md:space-y-10'>

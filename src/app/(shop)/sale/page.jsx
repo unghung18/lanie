@@ -346,7 +346,7 @@ const Sale = () => {
             </div>
             <div className='flex-1 p-6'>
                 {
-                    loading ? <Loader /> :
+                    loading ? <div className='w-full h-[calc(100vh-78.5px)]'><Loader /></div> :
                         products.length == 0 ?
                             <div className='flex-center w-full'>Không tìm thấy sản phẩm nào</div>
                             :
