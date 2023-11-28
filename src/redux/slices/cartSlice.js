@@ -46,9 +46,13 @@ const cartSlice = createSlice({
                 state.cartItems.push({
                     ...newItem,
                     quantity: 1,
-                    totalPrice: newItem.price
+                    totalPrice: newItem.price,
+                    selectedColor: newItem.selectedColor,
+                    selectedSize: newItem.selectedSize
                 });
             } else {
+                existingItem.selectedSize = newItem.selectedSize
+                existingItem.selectedColor = newItem.selectedColor
                 existingItem.quantity++;
                 existingItem.totalPrice =
                     Number(existingItem.totalPrice) + Number(newItem.price);

@@ -2,12 +2,12 @@
 import ImageGallery from '@/components/ImageGallery';
 import RatingStart from '@/components/RatingStart';
 import { FaRegCommentDots } from "react-icons/fa";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi"
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import ProductCard from '@/components/ProductCard';
 import { useDispatch } from 'react-redux';
 import { cartActions } from '@/redux/slices/cartSlice';
@@ -17,8 +17,8 @@ const Page = ({ params }) => {
 
     const [product, setProduct] = useState(undefined);
     const [similarProducts, setSimilarProducts] = useState([]);
-    const [selectedSize, setSelectedSize] = useState(null);
-    const [selectedColor, setSelectedColor] = useState(null);
+    const [selectedSize, setSelectedSize] = useState(0);
+    const [selectedColor, setSelectedColor] = useState(0);
     const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
@@ -98,8 +98,8 @@ const Page = ({ params }) => {
                             <ul className='flex space-x-5'>
                                 {product.size?.map((e, i) => (
                                     <li key={i}
-                                        className={`p-1 px-2 border rounded-lg cursor-pointer inline-block text-center ${selectedSize == e ? "bg-black text-white" : "bg-white text-black"}`}
-                                        onClick={() => setSelectedSize(e)}
+                                        className={`p-1 px-2 border rounded-lg cursor-pointer inline-block text-center ${selectedSize == i ? "bg-black text-white" : "bg-white text-black"}`}
+                                        onClick={() => setSelectedSize(i)}
                                     >
                                         {e}
                                     </li>
@@ -110,12 +110,12 @@ const Page = ({ params }) => {
                                 {product.color?.map((e, i) => (
                                     <div className='relative w-[35px] h-[35px] border border-neutral-400 m-1 flex-center'
                                         key={i}
-                                        onClick={() => setSelectedColor(e)}
+                                        onClick={() => setSelectedColor(i)}
                                         style={{
                                             borderRadius: '100%',
                                             backgroundColor: e,
                                         }}>
-                                        {selectedColor == e && <span className='text-[#fff]'>✓</span>}
+                                        {selectedColor == i && <span className='text-[#fff]'>✓</span>}
                                     </div>
                                 ))}
                             </div>
@@ -128,7 +128,7 @@ const Page = ({ params }) => {
                                 </div>
                             </div>
                             <div className='flex max-[930px]:space-y-3 space-y-0 space-x-3 max-[930px]:space-x-0 max-[930px]:flex-wrap text-center'>
-                                <div onClick={() => dispatch(cartActions.addItem(product))} className='py-2 px-3 rounded-lg border cursor-pointer bg-black text-white max-[930px]:w-full'>THÊM GIỎ HÀNG</div>
+                                <div onClick={() => dispatch(cartActions.addItem({ ...product, selectedSize: product.size[selectedSize], selectedColor: product.color[selectedColor] }))} className='py-2 px-3 rounded-lg border cursor-pointer bg-black text-white max-[930px]:w-full'>THÊM GIỎ HÀNG</div>
                                 <Link href="/checkout" className='py-2 px-3 rounded-lg border cursor-pointer bg-black text-white max-[930px]:w-full'>MUA NGAY</Link>
                             </div>
                             <h3 className='font-bold mt-8 mb-3 text-[14px]'>Mô tả sản phẩm</h3>

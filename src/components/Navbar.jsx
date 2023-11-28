@@ -119,11 +119,12 @@ const Navbar = () => {
                                                 <div className='flex items-center'>
                                                     <img src={e.image[0]} alt='product-img' className='w-[50px] rounded-sm mr-3' />
                                                     <div>
-                                                        <p className='font-bold'>{e.name}</p>
+                                                        <p className='font-bold'>{e.title}</p>
                                                         <div>
                                                             <span className='mr-2'>SL: {e.quantity}</span>
                                                             <span className='text-[#f51167]'>Giá: {e.totalPrice.toLocaleString()}₫</span>
                                                         </div>
+                                                        <p>{e.selectedSize.charAt(0).toUpperCase() + e.selectedSize.slice(1)} / {e.selectedColor}</p>
                                                     </div>
                                                 </div>
                                                 <AiOutlineClose size={20} onClick={() => deleteItem(e._id)} />
