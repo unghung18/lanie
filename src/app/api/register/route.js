@@ -15,7 +15,7 @@ export const POST = async (request) => {
         if (checkedUser) {
             return NextResponse.json({
                 success: false,
-                message: "Email already taken",
+                message: "Tài khoản đã được đăng ký !!!",
             }, { status: 422 })
         }
 
