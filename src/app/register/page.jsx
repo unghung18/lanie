@@ -28,7 +28,7 @@ const Register = () => {
                 },
                 body: JSON.stringify(user)
             })
-            const data = await res.json()
+            const data = await res.json();
             if (data.success) {
                 toast.success("Đăng ký tài khoản thành công", {
                     theme: "colored"

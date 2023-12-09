@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Loader from './Loader';
+import Image from 'next/image';
 
 const ProductCard = ({ data }) => {
 
@@ -25,7 +26,7 @@ const ProductCard = ({ data }) => {
                 </Link>
                 :
                 <div>
-                    <Loader />
+                    <img src="/lazyload.png" alt="lazyloading" />
                 </div>
             }
         </>
